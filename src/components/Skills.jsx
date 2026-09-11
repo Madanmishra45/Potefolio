@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
   Code2, Terminal, FileCode, Braces, Layout, Atom, Server, Cpu, Globe, Palette, 
   Database, HardDrive, Cloud, GitBranch, CloudRain, Box, Workflow, AppWindow, 
-  Code, BoxSelect, Send, TerminalSquare, Layers, Search, Sparkles
+  Code, BoxSelect, Send, TerminalSquare, Layers, Search
 } from 'lucide-react';
 import { skillsData } from '../data/portfolioData';
 
@@ -17,27 +17,22 @@ const Skills = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const categories = [
-    { id: 'all', label: 'All Stack' },
-    { id: 'languages', label: 'Languages' },
-    { id: 'webDev', label: 'Web Dev' },
-    { id: 'databases', label: 'Databases' },
-    { id: 'cloudDevOps', label: 'DevOps & Cloud' },
-    { id: 'tools', label: 'Tools & IDEs' }
+    { id: 'all', label: 'ALL STACK' },
+    { id: 'languages', label: 'LANGUAGES' },
+    { id: 'webDev', label: 'WEB DEV' },
+    { id: 'databases', label: 'DATABASES' },
+    { id: 'cloudDevOps', label: 'CLOUD & DEVOPS' },
+    { id: 'tools', label: 'TOOLS & IDES' }
   ];
 
-  const getLevelPercentage = (level) => {
+  const getLevelBadgeStyle = (level) => {
     switch (level.toLowerCase()) {
-      case 'advanced': return '90%';
-      case 'intermediate': return '75%';
-      default: return '60%';
-    }
-  };
-
-  const getLevelColor = (level) => {
-    switch (level.toLowerCase()) {
-      case 'advanced': return 'var(--accent-emerald)';
-      case 'intermediate': return 'var(--accent-cyan)';
-      default: return 'var(--accent-indigo)';
+      case 'advanced':
+        return { color: '#00f0ff', bg: 'rgba(0, 240, 255, 0.1)', border: 'rgba(0, 240, 255, 0.3)' };
+      case 'intermediate':
+        return { color: '#a855f7', bg: 'rgba(168, 85, 247, 0.1)', border: 'rgba(168, 85, 247, 0.3)' };
+      default:
+        return { color: '#3b82f6', bg: 'rgba(59, 130, 246, 0.1)', border: 'rgba(59, 130, 246, 0.3)' };
     }
   };
 
@@ -51,19 +46,19 @@ const Skills = () => {
     if (filtered.length === 0) return null;
 
     return (
-      <div style={{ marginBottom: '2.5rem' }}>
+      <div style={{ marginBottom: '3rem' }}>
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '0.6rem',
-            marginBottom: '1.2rem',
-            paddingBottom: '0.5rem',
-            borderBottom: '1px solid var(--border-color)'
+            gap: '0.75rem',
+            marginBottom: '1.5rem',
+            paddingBottom: '0.6rem',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
           }}
         >
-          <CategoryIcon size={20} color="var(--accent-cyan)" />
-          <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#ffffff' }}>
+          <CategoryIcon size={22} color="#00f0ff" />
+          <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', fontFamily: 'var(--font-display)' }}>
             {groupTitle}
           </h3>
         </div>
@@ -71,66 +66,66 @@ const Skills = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
-            gap: '1.1rem'
+            gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+            gap: '1.25rem'
           }}
         >
           {filtered.map((skill, index) => {
             const IconComponent = iconMap[skill.icon] || Code2;
-            const progress = getLevelPercentage(skill.level);
-            const levelColor = getLevelColor(skill.level);
+            const badgeStyle = getLevelBadgeStyle(skill.level);
 
             return (
               <div
                 key={index}
                 className="glass-card spotlight-card"
                 style={{
-                  padding: '1.2rem',
+                  padding: '1.35rem',
                   display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.8rem'
+                  alignItems: 'center',
+                  gap: '1rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
-                  <div
+                <div
+                  style={{
+                    width: '46px',
+                    height: '46px',
+                    borderRadius: '12px',
+                    background: 'rgba(255, 255, 255, 0.04)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: badgeStyle.color,
+                    flexShrink: 0,
+                    boxShadow: `0 0 15px ${badgeStyle.color}20`
+                  }}
+                >
+                  <IconComponent size={22} />
+                </div>
+
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontWeight: 700, fontSize: '0.98rem', color: '#ffffff', marginBottom: '0.2rem' }}>
+                    {skill.name}
+                  </div>
+
+                  <span
                     style={{
-                      width: '42px',
-                      height: '42px',
-                      borderRadius: '10px',
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid var(--border-color)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: levelColor,
-                      flexShrink: 0
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.72rem',
+                      fontWeight: 600,
+                      padding: '0.15rem 0.55rem',
+                      borderRadius: 'var(--radius-sm)',
+                      background: badgeStyle.bg,
+                      color: badgeStyle.color,
+                      border: `1px solid ${badgeStyle.border}`,
+                      display: 'inline-block'
                     }}
                   >
-                    <IconComponent size={20} />
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: 600, fontSize: '0.95rem', color: '#ffffff' }}>
-                      {skill.name}
-                    </div>
-                    <div style={{ fontSize: '0.78rem', color: levelColor, fontWeight: 500 }}>
-                      {skill.level} ({progress})
-                    </div>
-                  </div>
+                    {skill.level}
+                  </span>
                 </div>
-
-                {/* Progress Bar Indicator */}
-                <div style={{ width: '100%', height: '5px', background: 'rgba(255,255,255,0.08)', borderRadius: '3px', overflow: 'hidden' }}>
-                  <div
-                    style={{
-                      width: progress,
-                      height: '100%',
-                      background: levelColor,
-                      borderRadius: '3px',
-                      transition: 'width 0.4s ease-out'
-                    }}
-                  />
-                </div>
-
               </div>
             );
           })}
@@ -143,23 +138,28 @@ const Skills = () => {
     <section id="skills" className="section">
       <div className="container">
         
-        {/* Header */}
+        {/* Section Header */}
         <div className="section-header">
-          <div className="section-badge">
-            <Layers size={14} />
-            <span>Tech Matrix</span>
-          </div>
-          <h2 className="section-title">
-            Technical <span className="gradient-text">Skills & Proficiency</span>
+          <div className="section-label">02 / SKILLS & TECH</div>
+          <h2 className="section-heading">
+            TECHNICAL <span className="gradient-cyan">STACK & MATRIX</span>
           </h2>
-          <p className="section-subtitle">
-            Languages, frameworks, database architectures, and developer tools I work with.
+          <p className="section-subtext">
+            Programming languages, frameworks, database systems, and developer toolkits I utilize in daily engineering.
           </p>
         </div>
 
-        {/* Filter Controls & Live Search */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', marginBottom: '2.5rem' }}>
-          
+        {/* Filters & Search Bar */}
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '1.2rem',
+            marginBottom: '3rem'
+          }}
+        >
           {/* Category Tabs */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
             {categories.map((cat) => (
@@ -167,15 +167,18 @@ const Skills = () => {
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
                 style={{
-                  padding: '0.5rem 1rem',
+                  padding: '0.55rem 1.1rem',
                   borderRadius: 'var(--radius-full)',
-                  border: activeCategory === cat.id ? '1px solid var(--accent-cyan)' : '1px solid var(--border-color)',
-                  background: activeCategory === cat.id ? 'rgba(6, 182, 212, 0.15)' : 'rgba(255, 255, 255, 0.03)',
+                  border: activeCategory === cat.id ? '1px solid #00f0ff' : '1px solid rgba(255, 255, 255, 0.12)',
+                  background: activeCategory === cat.id ? 'rgba(0, 240, 255, 0.15)' : 'rgba(255, 255, 255, 0.03)',
                   color: activeCategory === cat.id ? '#ffffff' : 'var(--text-muted)',
-                  fontSize: '0.85rem',
-                  fontWeight: 600,
+                  fontSize: '0.78rem',
+                  fontFamily: 'var(--font-mono)',
+                  fontWeight: 700,
+                  letterSpacing: '0.05em',
                   cursor: 'pointer',
-                  transition: 'all 0.2s ease'
+                  transition: 'all 0.2s ease',
+                  boxShadow: activeCategory === cat.id ? '0 0 15px rgba(0, 240, 255, 0.3)' : 'none'
                 }}
               >
                 {cat.label}
@@ -183,21 +186,21 @@ const Skills = () => {
             ))}
           </div>
 
-          {/* Search Box */}
+          {/* Live Search Input */}
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
               gap: '0.6rem',
-              background: 'rgba(16, 23, 42, 0.7)',
-              border: '1px solid var(--border-color)',
+              background: 'rgba(15, 18, 28, 0.7)',
+              border: '1px solid rgba(0, 240, 255, 0.25)',
               borderRadius: 'var(--radius-full)',
-              padding: '0.4rem 1rem',
+              padding: '0.45rem 1.1rem',
               width: '100%',
-              maxWidth: '260px'
+              maxWidth: '280px'
             }}
           >
-            <Search size={16} style={{ color: 'var(--accent-cyan)' }} />
+            <Search size={15} style={{ color: '#00f0ff' }} />
             <input
               type="text"
               placeholder="Search skill (e.g. React)..."
@@ -209,28 +212,28 @@ const Skills = () => {
                 outline: 'none',
                 color: '#fff',
                 fontSize: '0.85rem',
-                width: '100%'
+                width: '100%',
+                fontFamily: 'var(--font-sans)'
               }}
             />
           </div>
-
         </div>
 
-        {/* Skill Groups */}
+        {/* Render Skill Groups */}
         {(activeCategory === 'all' || activeCategory === 'languages') &&
-          renderSkillGroup('languages', 'Programming Languages', Code2)}
+          renderSkillGroup('languages', 'PROGRAMMING LANGUAGES', Code2)}
 
         {(activeCategory === 'all' || activeCategory === 'webDev') &&
-          renderSkillGroup('webDev', 'Web & API Frameworks', Layout)}
+          renderSkillGroup('webDev', 'WEB & API FRAMEWORKS', Layout)}
 
         {(activeCategory === 'all' || activeCategory === 'databases') &&
-          renderSkillGroup('databases', 'Database Management', Database)}
+          renderSkillGroup('databases', 'DATABASE MANAGEMENT', Database)}
 
         {(activeCategory === 'all' || activeCategory === 'cloudDevOps') &&
-          renderSkillGroup('cloudDevOps', 'Cloud & DevOps Fundamentals', Cloud)}
+          renderSkillGroup('cloudDevOps', 'CLOUD & DEVOPS FUNDAMENTALS', Cloud)}
 
         {(activeCategory === 'all' || activeCategory === 'tools') &&
-          renderSkillGroup('tools', 'Development Tools & IDEs', AppWindow)}
+          renderSkillGroup('tools', 'DEVELOPMENT TOOLS & IDES', AppWindow)}
 
       </div>
     </section>

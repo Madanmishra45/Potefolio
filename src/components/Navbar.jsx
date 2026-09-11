@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Download, Search } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
-import ThemeSwitcher from './ThemeSwitcher';
 
-const Navbar = ({ activeSection, onOpenCmd, currentTheme, setTheme }) => {
+const Navbar = ({ activeSection }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
 
   const navLinks = [
-    { name: 'Work', href: '#projects' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Profiles', href: '#profiles' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'ABOUT', href: '#about' },
+    { name: 'WORK', href: '#projects' },
+    { name: 'SKILLS', href: '#skills' },
+    { name: 'EXPERIENCE', href: '#experience' },
+    { name: 'PROFILES', href: '#profiles' },
+    { name: 'CONTACT', href: '#contact' },
   ];
 
   useEffect(() => {
@@ -40,120 +40,107 @@ const Navbar = ({ activeSection, onOpenCmd, currentTheme, setTheme }) => {
           left: 0,
           right: 0,
           zIndex: 1000,
-          transition: 'all 0.3s ease',
-          background: isScrolled ? 'rgba(7, 7, 7, 0.92)' : 'transparent',
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          background: isScrolled ? 'rgba(8, 10, 16, 0.92)' : 'transparent',
           backdropFilter: isScrolled ? 'blur(16px)' : 'none',
           WebkitBackdropFilter: isScrolled ? 'blur(16px)' : 'none',
-          borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid transparent',
-          padding: isScrolled ? '1rem 0' : '1.5rem 0'
+          borderBottom: isScrolled ? '1px solid rgba(0, 240, 255, 0.15)' : '1px solid transparent',
+          padding: isScrolled ? '0.85rem 0' : '1.3rem 0'
         }}
       >
         <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           
-          {/* Brand Logo (Left) */}
+          {/* Top-Left: Initials Logo */}
           <a
             href="#home"
             style={{
               textDecoration: 'none',
-              color: '#ffffff',
-              fontWeight: 800,
-              fontFamily: 'var(--font-sans)',
-              fontSize: '1.15rem',
-              letterSpacing: '-0.02em'
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.6rem'
             }}
           >
-            {personalInfo.name}
+            <div
+              style={{
+                width: '36px',
+                height: '36px',
+                borderRadius: '8px',
+                background: 'rgba(0, 240, 255, 0.1)',
+                border: '1px solid rgba(0, 240, 255, 0.4)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#00f0ff',
+                fontWeight: 900,
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.95rem',
+                boxShadow: '0 0 12px rgba(0, 240, 255, 0.25)'
+              }}
+            >
+              MM
+            </div>
+            <span
+              style={{
+                color: '#ffffff',
+                fontWeight: 800,
+                fontFamily: 'var(--font-display)',
+                fontSize: '1.1rem',
+                letterSpacing: '-0.02em'
+              }}
+            >
+              MADAN MISHRA
+            </span>
           </a>
 
-          {/* Desktop Links (Center) */}
-          <nav className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.href.substring(1);
-              return (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  style={{
-                    textDecoration: 'none',
-                    fontSize: '0.88rem',
-                    fontWeight: isActive ? 600 : 400,
-                    color: isActive ? '#ffffff' : 'var(--text-muted)',
-                    transition: 'all 0.2s ease',
-                    position: 'relative'
-                  }}
-                >
-                  {link.name}
-                  {isActive && (
-                    <span
-                      style={{
-                        position: 'absolute',
-                        bottom: '-4px',
-                        left: 0,
-                        right: 0,
-                        height: '1px',
-                        background: '#ffffff'
-                      }}
-                    />
-                  )}
-                </a>
-              );
-            })}
-          </nav>
-
-          {/* Status Badge & Controls (Right) */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
+          {/* Top-Right: Navigation */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.8rem' }}>
             
-            {/* Status pill matching screenshot */}
-            <div
-              className="desktop-nav"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                fontSize: '0.78rem',
-                color: 'var(--text-muted)',
-                fontFamily: 'var(--font-sans)'
-              }}
-            >
-              <span
-                style={{
-                  width: '6px',
-                  height: '6px',
-                  borderRadius: '50%',
-                  background: '#ffffff',
-                  boxShadow: '0 0 8px #ffffff'
-                }}
-              />
-              <span>Available for selected collaborations</span>
-            </div>
+            {/* Nav Links */}
+            <nav className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: '1.8rem' }}>
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.href.substring(1);
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    style={{
+                      textDecoration: 'none',
+                      fontSize: '0.8rem',
+                      fontFamily: 'var(--font-mono)',
+                      fontWeight: 600,
+                      letterSpacing: '0.06em',
+                      color: isActive ? '#00f0ff' : 'var(--text-muted)',
+                      transition: 'all 0.2s ease',
+                      position: 'relative'
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = '#ffffff'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = isActive ? '#00f0ff' : 'var(--text-muted)'}
+                  >
+                    {link.name}
+                    {isActive && (
+                      <span
+                        style={{
+                          position: 'absolute',
+                          bottom: '-4px',
+                          left: 0,
+                          right: 0,
+                          height: '2px',
+                          background: 'linear-gradient(90deg, #00f0ff, #a855f7)',
+                          borderRadius: '2px',
+                          boxShadow: '0 0 8px #00f0ff'
+                        }}
+                      />
+                    )}
+                  </a>
+                );
+              })}
+            </nav>
 
-            {/* Command Palette Trigger */}
-            <button
-              onClick={onOpenCmd}
-              title="Search (Ctrl+K)"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.35rem',
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid var(--border-color)',
-                borderRadius: 'var(--radius-full)',
-                padding: '0.35rem 0.75rem',
-                color: 'var(--text-muted)',
-                fontSize: '0.75rem',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease'
-              }}
-            >
-              <Search size={13} style={{ color: '#fff' }} />
-              <kbd style={{ fontSize: '0.68rem', background: 'rgba(255,255,255,0.1)', padding: '0.1rem 0.3rem', borderRadius: '3px', color: '#fff' }}>⌘K</kbd>
-            </button>
-
-            {/* Mobile Hamburger Menu Toggle */}
+            {/* Mobile Menu Toggle Button */}
             <button
               className="mobile-toggle"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle Navigation"
+              aria-label="Toggle Navigation Menu"
               style={{
                 display: 'none',
                 background: 'transparent',
@@ -162,7 +149,7 @@ const Navbar = ({ activeSection, onOpenCmd, currentTheme, setTheme }) => {
                 cursor: 'pointer'
               }}
             >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileMenuOpen ? <X size={24} style={{ color: '#00f0ff' }} /> : <Menu size={24} />}
             </button>
 
           </div>
@@ -177,12 +164,13 @@ const Navbar = ({ activeSection, onOpenCmd, currentTheme, setTheme }) => {
               top: '100%',
               left: 0,
               right: 0,
-              background: '#0c0c0c',
-              borderBottom: '1px solid var(--border-color)',
+              background: '#0b0d14',
+              borderBottom: '1px solid rgba(0, 240, 255, 0.2)',
               padding: '1.5rem',
               display: 'flex',
               flexDirection: 'column',
-              gap: '1rem'
+              gap: '1.2rem',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.9)'
             }}
           >
             {navLinks.map((link) => (
@@ -192,8 +180,9 @@ const Navbar = ({ activeSection, onOpenCmd, currentTheme, setTheme }) => {
                 onClick={() => setMobileMenuOpen(false)}
                 style={{
                   textDecoration: 'none',
-                  color: activeSection === link.href.substring(1) ? '#ffffff' : 'var(--text-muted)',
-                  fontWeight: 600,
+                  color: activeSection === link.href.substring(1) ? '#00f0ff' : 'var(--text-muted)',
+                  fontWeight: 700,
+                  fontFamily: 'var(--font-mono)',
                   fontSize: '1rem'
                 }}
               >
@@ -202,7 +191,20 @@ const Navbar = ({ activeSection, onOpenCmd, currentTheme, setTheme }) => {
             ))}
           </div>
         )}
+
       </header>
+
+      {/* Style overrides for responsive navbar display */}
+      <style>{`
+        @media (max-width: 900px) {
+          .desktop-nav {
+            display: none !important;
+          }
+          .mobile-toggle {
+            display: block !important;
+          }
+        }
+      `}</style>
     </>
   );
 };

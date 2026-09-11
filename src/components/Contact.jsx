@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Send, CheckCircle2, Copy, Check } from 'lucide-react';
+import { Mail, MapPin, Send, CheckCircle2, Copy, Check, Sparkles } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import { personalInfo, socialLinks } from '../data/portfolioData';
 
@@ -59,62 +59,68 @@ const Contact = ({ addToast }) => {
     <section id="contact" className="section">
       <div className="container">
         
-        {/* Section Header */}
-        <div className="section-header">
-          <div className="section-badge">
-            <Mail size={14} />
-            <span>Get In Touch</span>
-          </div>
-          <h2 className="section-title">
-            Let's Connect & <span className="gradient-text">Collaborate</span>
+        {/* Section Header with Giant CTA Headline */}
+        <div className="section-header" style={{ textAlign: 'center', maxWidth: '850px', margin: '0 auto 4rem auto' }}>
+          <div className="section-label" style={{ justifyContent: 'center' }}>06 / GET IN TOUCH</div>
+          <h2
+            className="editorial-title"
+            style={{
+              fontSize: 'clamp(2.5rem, 5.2vw, 4.5rem)',
+              fontWeight: 900,
+              letterSpacing: '-0.04em',
+              lineHeight: 1.05,
+              marginBottom: '1.2rem'
+            }}
+          >
+            LET'S BUILD <span className="gradient-purple">SOMETHING GREAT.</span>
           </h2>
-          <p className="section-subtitle">
-            Whether you have an internship role, project opportunity, or developer inquiry, reach out anytime!
+          <p className="section-subtext" style={{ margin: '0 auto' }}>
+            Available for Software Engineering internships, full-stack developer roles, and high-impact project collaborations.
           </p>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: '2.5rem' }}>
           
-          {/* Left Column: Direct Info & Quick Copy */}
-          <div>
-            <div className="glass-card spotlight-card" style={{ padding: '2rem', marginBottom: '1.5rem' }}>
-              <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#ffffff', marginBottom: '1.5rem' }}>
-                Contact Details
+          {/* Left Column: Direct Info & Copy Button */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div className="glass-card spotlight-card" style={{ padding: '2.2rem' }}>
+              <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#ffffff', fontFamily: 'var(--font-display)', marginBottom: '1.5rem' }}>
+                DIRECT CONTACT
               </h3>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.4rem' }}>
                 
-                {/* Email Item with Copy Button */}
+                {/* Email Item */}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <div
                       style={{
-                        width: '44px',
-                        height: '44px',
+                        width: '46px',
+                        height: '46px',
                         borderRadius: '12px',
-                        background: 'rgba(6, 182, 212, 0.1)',
-                        border: '1px solid rgba(6, 182, 212, 0.25)',
+                        background: 'rgba(0, 240, 255, 0.1)',
+                        border: '1px solid rgba(0, 240, 255, 0.3)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: 'var(--accent-cyan)'
+                        color: '#00f0ff'
                       }}
                     >
                       <Mail size={20} />
                     </div>
                     <div>
-                      <span style={{ fontSize: '0.78rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>Email Address</span>
-                      <p style={{ fontWeight: 600, color: '#ffffff', fontSize: '0.95rem' }}>{personalInfo.email}</p>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>Email Address</span>
+                      <p style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.95rem' }}>{personalInfo.email}</p>
                     </div>
                   </div>
 
                   <button
                     onClick={handleCopyEmail}
-                    className="btn btn-secondary btn-sm"
+                    className="btn btn-cyber-outline btn-sm"
                     title="Copy Email Address"
-                    style={{ padding: '0.4rem 0.6rem' }}
+                    style={{ padding: '0.45rem 0.75rem' }}
                   >
-                    {copiedEmail ? <Check size={16} style={{ color: 'var(--accent-emerald)' }} /> : <Copy size={16} />}
+                    {copiedEmail ? <Check size={16} style={{ color: '#10b981' }} /> : <Copy size={16} />}
                   </button>
                 </div>
 
@@ -122,90 +128,90 @@ const Contact = ({ addToast }) => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                   <div
                     style={{
-                      width: '44px',
-                      height: '44px',
+                      width: '46px',
+                      height: '46px',
                       borderRadius: '12px',
-                      background: 'rgba(99, 102, 241, 0.1)',
-                      border: '1px solid rgba(99, 102, 241, 0.25)',
+                      background: 'rgba(168, 85, 247, 0.1)',
+                      border: '1px solid rgba(168, 85, 247, 0.3)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: 'var(--accent-indigo)'
+                      color: '#a855f7'
                     }}
                   >
                     <MapPin size={20} />
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.78rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>Location</span>
-                    <p style={{ fontWeight: 600, color: '#ffffff', fontSize: '0.95rem' }}>{personalInfo.location}</p>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>Location</span>
+                    <p style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.95rem' }}>{personalInfo.location}</p>
                   </div>
                 </div>
 
-                {/* Status */}
+                {/* Availability */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                   <div
                     style={{
-                      width: '44px',
-                      height: '44px',
+                      width: '46px',
+                      height: '46px',
                       borderRadius: '12px',
                       background: 'rgba(16, 185, 129, 0.1)',
-                      border: '1px solid rgba(16, 185, 129, 0.25)',
+                      border: '1px solid rgba(16, 185, 129, 0.3)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: 'var(--accent-emerald)'
+                      color: '#10b981'
                     }}
                   >
                     <CheckCircle2 size={20} />
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.78rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>Availability Status</span>
-                    <p style={{ fontWeight: 600, color: 'var(--accent-emerald)', fontSize: '0.95rem' }}>{personalInfo.availability}</p>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>Status</span>
+                    <p style={{ fontWeight: 700, color: '#10b981', fontSize: '0.92rem' }}>{personalInfo.availability}</p>
                   </div>
                 </div>
 
               </div>
             </div>
 
-            {/* Social Links Bar */}
+            {/* Social Links Box */}
             <div className="glass-card spotlight-card" style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
               <a
                 href={socialLinks.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: 'var(--text-muted)', textDecoration: 'none', transition: 'all 0.2s ease', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
-                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent-cyan)'}
+                style={{ color: 'var(--text-muted)', textDecoration: 'none', transition: 'all 0.2s ease', display: 'flex', alignItems: 'center', gap: '0.5rem', fontFamily: 'var(--font-mono)', fontSize: '0.88rem', fontWeight: 700 }}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#00f0ff'}
                 onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
               >
-                <GithubIcon size={20} />
-                <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>GitHub</span>
+                <GithubIcon size={18} />
+                <span>GITHUB</span>
               </a>
 
               <a
                 href={socialLinks.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: 'var(--text-muted)', textDecoration: 'none', transition: 'all 0.2s ease', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
-                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent-cyan)'}
+                style={{ color: 'var(--text-muted)', textDecoration: 'none', transition: 'all 0.2s ease', display: 'flex', alignItems: 'center', gap: '0.5rem', fontFamily: 'var(--font-mono)', fontSize: '0.88rem', fontWeight: 700 }}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#00f0ff'}
                 onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
               >
-                <LinkedinIcon size={20} />
-                <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>LinkedIn</span>
+                <LinkedinIcon size={18} />
+                <span>LINKEDIN</span>
               </a>
             </div>
           </div>
 
           {/* Right Column: Contact Form */}
-          <div className="glass-card spotlight-card" style={{ padding: '2.2rem' }}>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#ffffff', marginBottom: '1.5rem' }}>
-              Send Me a Direct Message
+          <div className="glass-card spotlight-card" style={{ padding: '2.4rem' }}>
+            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#ffffff', fontFamily: 'var(--font-display)', marginBottom: '1.5rem' }}>
+              SEND A DIRECT MESSAGE
             </h3>
 
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.3rem' }}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div>
-                  <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
-                    Your Name *
+                  <label style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem', fontFamily: 'var(--font-mono)' }}>
+                    YOUR NAME *
                   </label>
                   <input
                     type="text"
@@ -215,9 +221,9 @@ const Contact = ({ addToast }) => {
                     placeholder="John Doe"
                     style={{
                       width: '100%',
-                      padding: '0.75rem 1rem',
-                      background: 'rgba(7, 10, 18, 0.7)',
-                      border: errors.name ? '1px solid #ef4444' : '1px solid var(--border-color)',
+                      padding: '0.8rem 1rem',
+                      background: 'rgba(8, 10, 16, 0.8)',
+                      border: errors.name ? '1px solid #ef4444' : '1px solid rgba(255, 255, 255, 0.12)',
                       borderRadius: 'var(--radius-sm)',
                       color: '#ffffff',
                       fontSize: '0.9rem',
@@ -228,8 +234,8 @@ const Contact = ({ addToast }) => {
                 </div>
 
                 <div>
-                  <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
-                    Your Email *
+                  <label style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem', fontFamily: 'var(--font-mono)' }}>
+                    YOUR EMAIL *
                   </label>
                   <input
                     type="email"
@@ -239,9 +245,9 @@ const Contact = ({ addToast }) => {
                     placeholder="john@example.com"
                     style={{
                       width: '100%',
-                      padding: '0.75rem 1rem',
-                      background: 'rgba(7, 10, 18, 0.7)',
-                      border: errors.email ? '1px solid #ef4444' : '1px solid var(--border-color)',
+                      padding: '0.8rem 1rem',
+                      background: 'rgba(8, 10, 16, 0.8)',
+                      border: errors.email ? '1px solid #ef4444' : '1px solid rgba(255, 255, 255, 0.12)',
                       borderRadius: 'var(--radius-sm)',
                       color: '#ffffff',
                       fontSize: '0.9rem',
@@ -253,20 +259,20 @@ const Contact = ({ addToast }) => {
               </div>
 
               <div>
-                <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
-                  Subject *
+                <label style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem', fontFamily: 'var(--font-mono)' }}>
+                  SUBJECT *
                 </label>
                 <input
                   type="text"
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  placeholder="Project Opportunity / Hello"
+                  placeholder="Opportunity / Collaboration"
                   style={{
                     width: '100%',
-                    padding: '0.75rem 1rem',
-                    background: 'rgba(7, 10, 18, 0.7)',
-                    border: errors.subject ? '1px solid #ef4444' : '1px solid var(--border-color)',
+                    padding: '0.8rem 1rem',
+                    background: 'rgba(8, 10, 16, 0.8)',
+                    border: errors.subject ? '1px solid #ef4444' : '1px solid rgba(255, 255, 255, 0.12)',
                     borderRadius: 'var(--radius-sm)',
                     color: '#ffffff',
                     fontSize: '0.9rem',
@@ -277,20 +283,20 @@ const Contact = ({ addToast }) => {
               </div>
 
               <div>
-                <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
-                  Message *
+                <label style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem', fontFamily: 'var(--font-mono)' }}>
+                  MESSAGE *
                 </label>
                 <textarea
                   name="message"
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Tell me about your project or role details..."
+                  placeholder="Tell me about your role or project opportunity..."
                   style={{
                     width: '100%',
-                    padding: '0.75rem 1rem',
-                    background: 'rgba(7, 10, 18, 0.7)',
-                    border: errors.message ? '1px solid #ef4444' : '1px solid var(--border-color)',
+                    padding: '0.8rem 1rem',
+                    background: 'rgba(8, 10, 16, 0.8)',
+                    border: errors.message ? '1px solid #ef4444' : '1px solid rgba(255, 255, 255, 0.12)',
                     borderRadius: 'var(--radius-sm)',
                     color: '#ffffff',
                     fontSize: '0.9rem',
@@ -304,15 +310,15 @@ const Contact = ({ addToast }) => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn btn-primary"
+                className="btn btn-cyber-cyan"
                 style={{ width: '100%', marginTop: '0.5rem' }}
               >
                 {isSubmitting ? (
-                  <span>Sending Message...</span>
+                  <span>SENDING...</span>
                 ) : (
                   <>
-                    <Send size={18} />
-                    <span>Send Message</span>
+                    <Send size={16} />
+                    <span>SEND MESSAGE</span>
                   </>
                 )}
               </button>

@@ -1,13 +1,13 @@
 import React from 'react';
-import { User, GraduationCap, Target, BookOpen, Award, CheckCircle2, Zap, Code2, Sparkles } from 'lucide-react';
+import { User, BookOpen, Target, Award, Zap, Code2, Sparkles, CheckCircle2, Cpu } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 
 const About = () => {
   const statCards = [
-    { label: 'Years of Learning', value: personalInfo.stats.yearsLearning, icon: BookOpen, color: 'var(--accent-cyan)' },
-    { label: 'Projects Built', value: personalInfo.stats.projectsCompleted, icon: Zap, color: 'var(--accent-indigo)' },
-    { label: 'Tech Stack Skills', value: personalInfo.stats.technologiesLearned, icon: Target, color: 'var(--accent-purple)' },
-    { label: 'Certifications', value: personalInfo.stats.certificationsEarned, icon: Award, color: 'var(--accent-emerald)' }
+    { label: 'Years Learning', value: personalInfo.stats.yearsLearning, icon: BookOpen, color: '#00f0ff' },
+    { label: 'Projects Built', value: personalInfo.stats.projectsCompleted, icon: Zap, color: '#a855f7' },
+    { label: 'Technologies', value: personalInfo.stats.technologiesLearned, icon: Cpu, color: '#00f0ff' },
+    { label: 'Certifications', value: personalInfo.stats.certificationsEarned, icon: Award, color: '#10b981' }
   ];
 
   return (
@@ -16,25 +16,22 @@ const About = () => {
         
         {/* Section Header */}
         <div className="section-header">
-          <div className="section-badge">
-            <User size={14} />
-            <span>About Me</span>
-          </div>
-          <h2 className="section-title">
-            Passionate Developer & <span className="gradient-text">IT Engineer</span>
+          <div className="section-label">01 / ABOUT ME</div>
+          <h2 className="section-heading">
+            BUILDING SCALABLE <span className="gradient-purple">DIGITAL SYSTEMS</span> & EXPERIENCES
           </h2>
-          <p className="section-subtitle">
-            Get to know my technical background, academic foundation, career focus, and core strengths.
+          <p className="section-subtext">
+            Information Technology student and developer dedicated to clean architecture, high-performance web systems, and solving complex engineering challenges.
           </p>
         </div>
 
-        {/* Statistics Banner */}
+        {/* Statistics Banner Cards */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
             gap: '1.25rem',
-            marginBottom: '4rem'
+            marginBottom: '3.5rem'
           }}
         >
           {statCards.map((stat, idx) => {
@@ -44,7 +41,7 @@ const About = () => {
                 key={idx}
                 className="glass-card spotlight-card"
                 style={{
-                  padding: '1.5rem',
+                  padding: '1.6rem',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '1.2rem'
@@ -52,25 +49,33 @@ const About = () => {
               >
                 <div
                   style={{
-                    width: '52px',
-                    height: '52px',
+                    width: '54px',
+                    height: '54px',
                     borderRadius: '14px',
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid var(--border-color)',
+                    background: 'rgba(255, 255, 255, 0.04)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: stat.color,
-                    boxShadow: '0 4px 15px rgba(0,0,0,0.3)'
+                    boxShadow: `0 0 15px ${stat.color}25`
                   }}
                 >
                   <Icon size={26} />
                 </div>
                 <div>
-                  <h3 style={{ fontSize: '1.9rem', fontWeight: 800, color: '#ffffff', lineHeight: 1.1 }}>
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: '2rem',
+                      fontWeight: 900,
+                      color: '#ffffff',
+                      lineHeight: 1.1
+                    }}
+                  >
                     {stat.value}
                   </h3>
-                  <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', fontWeight: 500 }}>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'var(--font-mono)' }}>
                     {stat.label}
                   </p>
                 </div>
@@ -80,60 +85,68 @@ const About = () => {
         </div>
 
         {/* Main Content Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '2.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: '2.5rem' }}>
           
-          {/* Biography & Story */}
-          <div className="glass-card spotlight-card" style={{ padding: '2.2rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.2rem' }}>
-              <Code2 style={{ color: 'var(--accent-cyan)' }} size={22} />
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#ffffff' }}>
-                Professional Biography
+          {/* Left Column: Full Biography & Details */}
+          <div className="glass-card spotlight-card" style={{ padding: '2.4rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.4rem' }}>
+              <Code2 style={{ color: '#00f0ff' }} size={24} />
+              <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#ffffff', fontFamily: 'var(--font-display)' }}>
+                DEVELOPER PROFILE
               </h3>
             </div>
 
-            <p style={{ color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+            <p style={{ color: 'var(--text-muted)', lineHeight: 1.75, fontSize: '1.02rem', marginBottom: '2rem' }}>
               {personalInfo.fullBio}
             </p>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-color)' }}>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '1.2rem',
+                paddingTop: '1.5rem',
+                borderTop: '1px solid rgba(255, 255, 255, 0.08)'
+              }}
+            >
               <div>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Full Name</span>
-                <p style={{ fontWeight: 600, color: '#ffffff' }}>{personalInfo.name}</p>
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>Developer</span>
+                <p style={{ fontWeight: 700, color: '#ffffff', fontSize: '1rem' }}>{personalInfo.name}</p>
               </div>
 
               <div>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Degree</span>
-                <p style={{ fontWeight: 600, color: '#ffffff' }}>{personalInfo.degree}</p>
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>Degree</span>
+                <p style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.92rem' }}>{personalInfo.degree}</p>
               </div>
 
               <div>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>University</span>
-                <p style={{ fontWeight: 600, color: '#ffffff' }}>{personalInfo.university}</p>
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>University</span>
+                <p style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.92rem' }}>{personalInfo.university}</p>
               </div>
 
               <div>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Graduation</span>
-                <p style={{ fontWeight: 600, color: 'var(--accent-cyan)' }}>{personalInfo.graduationYear}</p>
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>Graduation</span>
+                <p style={{ fontWeight: 700, color: '#00f0ff', fontSize: '0.95rem' }}>{personalInfo.graduationYear}</p>
               </div>
             </div>
           </div>
 
-          {/* Core Focus & Strengths */}
+          {/* Right Column: Career Focus & Strengths */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             
             {/* Career Focus */}
-            <div className="glass-card spotlight-card" style={{ padding: '1.8rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem' }}>
-                <Target style={{ color: 'var(--accent-indigo)' }} size={20} />
-                <h4 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#ffffff' }}>
-                  Career & Technical Focus
+            <div className="glass-card spotlight-card" style={{ padding: '2rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.2rem' }}>
+                <Target style={{ color: '#a855f7' }} size={22} />
+                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#ffffff', fontFamily: 'var(--font-display)' }}>
+                  CAREER & TECHNICAL FOCUS
                 </h4>
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
                 {personalInfo.careerInterests.map((item, idx) => (
-                  <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: 'var(--text-muted)', fontSize: '0.92rem' }}>
-                    <CheckCircle2 size={16} style={{ color: 'var(--accent-emerald)', flexShrink: 0 }} />
+                  <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.7rem', color: 'var(--text-muted)', fontSize: '0.92rem' }}>
+                    <CheckCircle2 size={16} style={{ color: '#00f0ff', flexShrink: 0 }} />
                     <span>{item}</span>
                   </div>
                 ))}
@@ -141,17 +154,17 @@ const About = () => {
             </div>
 
             {/* Core Strengths */}
-            <div className="glass-card spotlight-card" style={{ padding: '1.8rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem' }}>
-                <Sparkles style={{ color: 'var(--accent-purple)' }} size={20} />
-                <h4 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#ffffff' }}>
-                  Key Strengths
+            <div className="glass-card spotlight-card" style={{ padding: '2rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.2rem' }}>
+                <Sparkles style={{ color: '#00f0ff' }} size={22} />
+                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#ffffff', fontFamily: 'var(--font-display)' }}>
+                  CORE STRENGTHS
                 </h4>
               </div>
 
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem' }}>
                 {personalInfo.strengths.map((str, idx) => (
-                  <span key={idx} className="tag-badge" style={{ fontSize: '0.82rem', padding: '0.4rem 0.8rem' }}>
+                  <span key={idx} className="tag-badge" style={{ fontSize: '0.8rem', padding: '0.4rem 0.85rem' }}>
                     {str}
                   </span>
                 ))}

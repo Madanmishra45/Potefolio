@@ -8,20 +8,17 @@ const iconMap = {
 
 const Services = () => {
   return (
-    <section id="services" className="section">
+    <section id="services" className="section" style={{ paddingTop: '2rem' }}>
       <div className="container">
         
         {/* Section Header */}
         <div className="section-header">
-          <div className="section-badge">
-            <Sparkles size={14} />
-            <span>Technical Scope</span>
-          </div>
-          <h2 className="section-title">
-            What I <span className="gradient-text">Can Do</span>
+          <div className="section-label">ENGINEERING CAPABILITIES</div>
+          <h2 className="section-heading">
+            DEVELOPMENT <span className="gradient-cyan">SERVICES & SOLUTIONS</span>
           </h2>
-          <p className="section-subtitle">
-            Core software development services, technical capabilities, and engineering solutions I offer.
+          <p className="section-subtext">
+            End-to-end software development capabilities across frontend, backend microservices, and database architecture.
           </p>
         </div>
 
@@ -38,9 +35,9 @@ const Services = () => {
             return (
               <div
                 key={service.id}
-                className="glass-card"
+                className="glass-card spotlight-card"
                 style={{
-                  padding: '2rem',
+                  padding: '2.2rem',
                   display: 'flex',
                   flexDirection: 'column'
                 }}
@@ -50,23 +47,24 @@ const Services = () => {
                     width: '52px',
                     height: '52px',
                     borderRadius: '14px',
-                    background: 'rgba(6, 182, 212, 0.1)',
-                    border: '1px solid rgba(6, 182, 212, 0.25)',
+                    background: 'rgba(0, 240, 255, 0.1)',
+                    border: '1px solid rgba(0, 240, 255, 0.3)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: 'var(--accent-cyan)',
-                    marginBottom: '1.5rem'
+                    color: '#00f0ff',
+                    marginBottom: '1.5rem',
+                    boxShadow: '0 0 15px rgba(0, 240, 255, 0.25)'
                   }}
                 >
                   <IconComponent size={26} />
                 </div>
 
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.6rem' }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', fontFamily: 'var(--font-display)', marginBottom: '0.6rem' }}>
                   {service.title}
                 </h3>
 
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', lineHeight: 1.6 }}>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', lineHeight: 1.65 }}>
                   {service.description}
                 </p>
               </div>

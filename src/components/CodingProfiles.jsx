@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code, Terminal, ExternalLink, Globe, Award, Trophy, Star } from 'lucide-react';
+import { Code, Terminal, ExternalLink, Globe, Trophy, Star } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import { socialLinks } from '../data/portfolioData';
 
@@ -13,7 +13,7 @@ const CodingProfiles = () => {
       badge: 'Knight | Top 8%',
       description: 'Data structures, Graph theory, Dynamic Programming & algorithms',
       icon: Code,
-      color: '#ffa116'
+      color: '#00f0ff'
     },
     {
       name: 'GitHub',
@@ -21,9 +21,9 @@ const CodingProfiles = () => {
       url: socialLinks.github,
       stat: '480+ Commits',
       badge: '18+ Repositories',
-      description: 'Full-stack software web apps, Java backends, and open source codebases',
+      description: 'Full-stack web apps, Java backends, and open source codebases',
       icon: GithubIcon,
-      color: 'var(--accent-cyan)'
+      color: '#00f0ff'
     },
     {
       name: 'GeeksforGeeks',
@@ -33,7 +33,7 @@ const CodingProfiles = () => {
       badge: 'Top Contributor',
       description: 'Problem-solving track in Core CS, DBMS, OS, and Data Structures',
       icon: Terminal,
-      color: '#2f8d46'
+      color: '#10b981'
     },
     {
       name: 'CodeChef',
@@ -53,7 +53,7 @@ const CodingProfiles = () => {
       badge: 'Java & Problem Solving',
       description: 'Domain certifications in Java, SQL, Problem Solving & Python',
       icon: Star,
-      color: '#2ec866'
+      color: '#10b981'
     },
     {
       name: 'LinkedIn',
@@ -61,27 +61,24 @@ const CodingProfiles = () => {
       url: socialLinks.linkedin,
       stat: '500+ Connections',
       badge: 'Active Profile',
-      description: 'Professional networking, career posts, and collaboration',
+      description: 'Professional networking, career updates, and collaboration',
       icon: LinkedinIcon,
-      color: '#0077b5'
+      color: '#00f0ff'
     }
   ];
 
   return (
-    <section id="profiles" className="section">
+    <section id="profiles" className="section" style={{ paddingTop: '2rem' }}>
       <div className="container">
         
         {/* Section Header */}
         <div className="section-header">
-          <div className="section-badge">
-            <Globe size={14} />
-            <span>Developer Footprint</span>
-          </div>
-          <h2 className="section-title">
-            Coding & Problem Solving <span className="gradient-text">Profiles</span>
+          <div className="section-label">DEVELOPER FOOTPRINT</div>
+          <h2 className="section-heading">
+            CODING & <span className="gradient-cyan">PROFILES MATRIX</span>
           </h2>
-          <p className="section-subtitle">
-            My ratings, problem-solving milestones, and developer presence across top platforms.
+          <p className="section-subtext">
+            Ratings, problem-solving milestones, and developer presence across major platforms.
           </p>
         </div>
 
@@ -89,7 +86,7 @@ const CodingProfiles = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(310px, 1fr))',
             gap: '1.5rem'
           }}
         >
@@ -103,7 +100,7 @@ const CodingProfiles = () => {
                 rel="noopener noreferrer"
                 className="glass-card spotlight-card"
                 style={{
-                  padding: '1.6rem',
+                  padding: '1.8rem',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
@@ -119,12 +116,13 @@ const CodingProfiles = () => {
                         width: '46px',
                         height: '46px',
                         borderRadius: '12px',
-                        background: 'rgba(255, 255, 255, 0.05)',
-                        border: '1px solid var(--border-color)',
+                        background: 'rgba(255, 255, 255, 0.04)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: profile.color
+                        color: profile.color,
+                        boxShadow: `0 0 15px ${profile.color}25`
                       }}
                     >
                       <IconComponent size={24} />
@@ -132,12 +130,13 @@ const CodingProfiles = () => {
 
                     <span
                       style={{
-                        fontSize: '0.78rem',
-                        fontWeight: 600,
+                        fontSize: '0.75rem',
+                        fontFamily: 'var(--font-mono)',
+                        fontWeight: 700,
                         padding: '0.25rem 0.65rem',
                         borderRadius: 'var(--radius-full)',
-                        background: 'rgba(255, 255, 255, 0.06)',
-                        border: '1px solid var(--border-color)',
+                        background: 'rgba(255, 255, 255, 0.05)',
+                        border: '1px solid rgba(255, 255, 255, 0.15)',
                         color: profile.color
                       }}
                     >
@@ -145,15 +144,15 @@ const CodingProfiles = () => {
                     </span>
                   </div>
 
-                  <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.3rem' }}>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', fontFamily: 'var(--font-display)', marginBottom: '0.3rem' }}>
                     {profile.name}
                   </h3>
 
-                  <div style={{ fontSize: '0.88rem', color: 'var(--accent-cyan)', fontWeight: 600, marginBottom: '0.8rem' }}>
+                  <div style={{ fontSize: '0.9rem', color: '#00f0ff', fontWeight: 700, fontFamily: 'var(--font-mono)', marginBottom: '0.8rem' }}>
                     {profile.stat}
                   </div>
 
-                  <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
                     {profile.description}
                   </p>
                 </div>
@@ -164,14 +163,15 @@ const CodingProfiles = () => {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     paddingTop: '0.9rem',
-                    borderTop: '1px solid var(--border-color)',
-                    fontSize: '0.85rem',
+                    borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+                    fontSize: '0.82rem',
+                    fontFamily: 'var(--font-mono)',
                     fontWeight: 600,
                     color: 'var(--text-muted)'
                   }}
                 >
                   <span>@{profile.handle}</span>
-                  <ExternalLink size={15} style={{ color: 'var(--accent-cyan)' }} />
+                  <ExternalLink size={14} style={{ color: '#00f0ff' }} />
                 </div>
               </a>
             );

@@ -1,73 +1,62 @@
 import React from 'react';
-import { Award, ExternalLink, Calendar, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Award, ExternalLink, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { certificationsData } from '../data/portfolioData';
 
 const Certifications = () => {
   return (
-    <section id="certifications" className="section">
+    <section id="certifications" className="section" style={{ paddingTop: '2rem' }}>
       <div className="container">
         
         {/* Section Header */}
         <div className="section-header">
-          <div className="section-badge">
-            <Award size={14} />
-            <span>Credentials</span>
-          </div>
-          <h2 className="section-title">
-            Certifications & <span className="gradient-text">Badges</span>
+          <div className="section-label">INDUSTRY CERTIFICATIONS</div>
+          <h2 className="section-heading">
+            VERIFIED <span className="gradient-purple">CREDENTIALS</span>
           </h2>
-          <p className="section-subtitle">
-            Industry and platform-verified certifications demonstrating proficiency in cloud, programming, and web technology.
+          <p className="section-subtext">
+            Professional certifications in Cloud Architecture, Java Enterprise Development, and Modern Frontend Engineering.
           </p>
         </div>
 
-        {/* Certifications Grid */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
             gap: '1.8rem'
           }}
         >
           {certificationsData.map((cert) => (
             <div
               key={cert.id}
-              className="glass-card"
+              className="glass-card spotlight-card"
               style={{
-                padding: '1.8rem',
+                padding: '2.2rem',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'space-between',
-                position: 'relative',
-                overflow: 'hidden'
+                justifyContent: 'space-between'
               }}
             >
-              {/* Decorative Gradient Bar */}
-              <div
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: '4px',
-                  background: 'linear-gradient(90deg, var(--accent-cyan), var(--accent-indigo))'
-                }}
-              />
-
               <div>
-                {/* Header Icon & Issuer */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.2rem' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    marginBottom: '1.4rem'
+                  }}
+                >
                   <div
                     style={{
-                      width: '46px',
-                      height: '46px',
+                      width: '48px',
+                      height: '48px',
                       borderRadius: '12px',
-                      background: 'rgba(6, 182, 212, 0.1)',
-                      border: '1px solid rgba(6, 182, 212, 0.25)',
+                      background: 'rgba(168, 85, 247, 0.1)',
+                      border: '1px solid rgba(168, 85, 247, 0.3)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: 'var(--accent-cyan)'
+                      color: '#a855f7',
+                      boxShadow: '0 0 15px rgba(168, 85, 247, 0.25)'
                     }}
                   >
                     <Award size={24} />
@@ -75,46 +64,38 @@ const Certifications = () => {
 
                   <span
                     style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.3rem',
-                      fontSize: '0.82rem',
-                      color: 'var(--text-muted)',
-                      fontFamily: 'var(--font-mono)'
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.78rem',
+                      color: 'var(--text-muted)'
                     }}
                   >
-                    <Calendar size={14} color="var(--accent-indigo)" />
                     {cert.date}
                   </span>
                 </div>
 
-                <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.4rem', lineHeight: 1.3 }}>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#ffffff', fontFamily: 'var(--font-display)', marginBottom: '0.4rem' }}>
                   {cert.name}
                 </h3>
 
-                <p style={{ color: 'var(--accent-cyan)', fontWeight: 600, fontSize: '0.9rem', marginBottom: '1rem' }}>
-                  Issued by {cert.issuer}
-                </p>
+                <div style={{ color: '#00f0ff', fontSize: '0.9rem', fontWeight: 600, marginBottom: '1rem' }}>
+                  {cert.issuer}
+                </div>
 
-                {/* Credential ID */}
-                <div style={{ marginBottom: '1.5rem', fontSize: '0.82rem', color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                    <ShieldCheck size={14} color="var(--accent-emerald)" />
-                    ID: {cert.credentialId}
-                  </span>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: 'var(--text-dim)', marginBottom: '1.5rem' }}>
+                  Credential ID: {cert.credentialId}
                 </div>
               </div>
 
-              {/* Verification Button */}
               <a
                 href={cert.verificationLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-outline btn-sm"
-                style={{ width: '100%' }}
+                className="btn btn-cyber-outline btn-sm"
+                style={{ width: '100%', justifyContent: 'center' }}
               >
-                <ExternalLink size={15} />
-                <span>Verify Credential</span>
+                <ShieldCheck size={15} style={{ color: '#00f0ff' }} />
+                <span>VERIFY CERTIFICATE</span>
+                <ExternalLink size={13} />
               </a>
 
             </div>

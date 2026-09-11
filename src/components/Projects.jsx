@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ExternalLink, Eye, ArrowUpRight, Search } from 'lucide-react';
+import { Eye, ArrowUpRight, Search, Layers } from 'lucide-react';
 import { GithubIcon } from './Icons';
 import { projectsData } from '../data/portfolioData';
 import ProjectModal from './ProjectModal';
@@ -20,52 +20,28 @@ const Projects = () => {
   });
 
   return (
-    <section id="projects" className="section" style={{ paddingTop: '4rem' }}>
+    <section id="projects" className="section">
       <div className="container">
         
-        {/* Section Header (Matching Screenshot: SELECTED WORK | 04 Projects) */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            paddingBottom: '1.2rem',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-            marginBottom: '3rem'
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.9rem',
-              fontWeight: 700,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              color: '#ffffff'
-            }}
-          >
-            SELECTED WORK
+        {/* Section Header */}
+        <div className="section-header">
+          <div className="section-label">03 / SELECTED WORK</div>
+          <h2 className="section-heading">
+            FEATURED <span className="gradient-purple">PROJECT SHOWCASE</span>
           </h2>
-
-          <div
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.85rem',
-              color: 'var(--text-muted)'
-            }}
-          >
-            0{filteredProjects.length} projects
-          </div>
+          <p className="section-subtext">
+            Full-stack web applications, Java enterprise services, database query engines, and AI platforms built with high standards.
+          </p>
         </div>
 
-        {/* Category Filters & Search */}
+        {/* Filters & Search Row */}
         <div
           style={{
             display: 'flex',
             flexWrap: 'wrap',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: '1rem',
+            gap: '1.2rem',
             marginBottom: '3rem'
           }}
         >
@@ -75,19 +51,21 @@ const Projects = () => {
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 style={{
-                  padding: '0.45rem 1.1rem',
+                  padding: '0.55rem 1.15rem',
                   borderRadius: 'var(--radius-full)',
-                  fontSize: '0.82rem',
+                  fontSize: '0.78rem',
                   fontFamily: 'var(--font-mono)',
-                  fontWeight: 600,
+                  fontWeight: 700,
+                  letterSpacing: '0.05em',
                   cursor: 'pointer',
                   transition: 'all 0.2s ease',
-                  border: activeCategory === cat ? '1px solid #ffffff' : '1px solid rgba(255, 255, 255, 0.15)',
-                  background: activeCategory === cat ? '#ffffff' : 'transparent',
-                  color: activeCategory === cat ? '#070707' : 'var(--text-muted)'
+                  border: activeCategory === cat ? '1px solid #00f0ff' : '1px solid rgba(255, 255, 255, 0.12)',
+                  background: activeCategory === cat ? 'rgba(0, 240, 255, 0.15)' : 'rgba(255, 255, 255, 0.03)',
+                  color: activeCategory === cat ? '#ffffff' : 'var(--text-muted)',
+                  boxShadow: activeCategory === cat ? '0 0 15px rgba(0, 240, 255, 0.3)' : 'none'
                 }}
               >
-                {cat}
+                {cat.toUpperCase()}
               </button>
             ))}
           </div>
@@ -97,15 +75,15 @@ const Projects = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '0.6rem',
-              background: 'rgba(255, 255, 255, 0.04)',
-              border: '1px solid rgba(255, 255, 255, 0.15)',
+              background: 'rgba(15, 18, 28, 0.7)',
+              border: '1px solid rgba(0, 240, 255, 0.25)',
               borderRadius: 'var(--radius-full)',
-              padding: '0.4rem 1rem',
+              padding: '0.45rem 1.1rem',
               width: '100%',
-              maxWidth: '260px'
+              maxWidth: '280px'
             }}
           >
-            <Search size={15} style={{ color: '#ffffff' }} />
+            <Search size={15} style={{ color: '#00f0ff' }} />
             <input
               type="text"
               placeholder="Search projects..."
@@ -124,142 +102,175 @@ const Projects = () => {
           </div>
         </div>
 
-        {/* Editorial Project Cards Stack (Matching Screenshot 01 Form/Function) */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+        {/* Large Editorial Project Cards Stack */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '3.5rem' }}>
           {filteredProjects.map((project, idx) => {
-            const isLightCard = idx % 2 === 0; // Alternating high-contrast off-white & dark cards
             const num = (idx + 1).toString().padStart(2, '0');
 
             return (
               <div
                 key={project.id}
+                className="glass-card spotlight-card"
                 style={{
-                  background: isLightCard ? '#f4f4f2' : '#121212',
-                  color: isLightCard ? '#070707' : '#ffffff',
-                  borderRadius: 'var(--radius-md)',
                   padding: '2.5rem',
-                  border: isLightCard ? '1px solid #ffffff' : '1px solid rgba(255, 255, 255, 0.15)',
-                  boxShadow: '0 20px 40px rgba(0,0,0,0.6)',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+                  borderRadius: 'var(--radius-lg)',
+                  border: '1px solid rgba(255, 255, 255, 0.12)',
+                  transition: 'all 0.35s ease'
                 }}
               >
-                {/* Top Row: Index Number & Icon */}
+                {/* Top Row: Index Number & Date */}
                 <div
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    marginBottom: '2rem',
+                    marginBottom: '1.8rem',
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '0.9rem',
-                    fontWeight: 600,
-                    opacity: 0.8
+                    fontSize: '0.85rem',
+                    fontWeight: 700,
+                    color: '#00f0ff'
                   }}
                 >
-                  <span>{num}</span>
-                  <span style={{ fontSize: '0.8rem', letterSpacing: '0.05em' }}>{project.date}</span>
+                  <span style={{ fontSize: '1.1rem', letterSpacing: '0.1em' }}>PROJECT // {num}</span>
+                  <span style={{ color: 'var(--text-muted)' }}>{project.date}</span>
                 </div>
 
-                {/* Main Content Grid */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '2.5rem', alignItems: 'center' }}>
-                  
-                  {/* Left Title & Category */}
-                  <div>
+                {/* Main Content Grid: Image + Details */}
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '2.5rem',
+                    alignItems: 'center'
+                  }}
+                  className="project-card-grid"
+                >
+                  {/* Left Column: Project Thumbnail Showcase */}
+                  <div
+                    style={{
+                      position: 'relative',
+                      borderRadius: 'var(--radius-md)',
+                      overflow: 'hidden',
+                      border: '1px solid rgba(0, 240, 255, 0.2)',
+                      boxShadow: '0 20px 40px rgba(0,0,0,0.8)'
+                    }}
+                    className="project-image-wrapper"
+                  >
+                    <img
+                      src={project.thumbnail}
+                      alt={project.name}
+                      style={{
+                        width: '100%',
+                        height: '320px',
+                        objectFit: 'cover',
+                        display: 'block',
+                        transition: 'transform 0.5s ease'
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: 'absolute',
+                        inset: 0,
+                        background: 'linear-gradient(180deg, rgba(8, 10, 16, 0.2) 0%, rgba(8, 10, 16, 0.85) 100%)'
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: 'absolute',
+                        bottom: '1.2rem',
+                        left: '1.2rem',
+                        right: '1.2rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between'
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.75rem',
+                          padding: '0.25rem 0.65rem',
+                          borderRadius: '4px',
+                          background: 'rgba(0, 240, 255, 0.2)',
+                          color: '#00f0ff',
+                          border: '1px solid rgba(0, 240, 255, 0.4)',
+                          backdropFilter: 'blur(8px)'
+                        }}
+                      >
+                        {project.category}
+                      </span>
+                      <span
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.75rem',
+                          color: '#a0a5b5'
+                        }}
+                      >
+                        {project.role}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Title, Description, Tags, Action Buttons */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
                     <h3
                       style={{
                         fontFamily: 'var(--font-display)',
-                        fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)',
+                        fontSize: 'clamp(1.6rem, 2.8vw, 2.3rem)',
                         fontWeight: 800,
-                        letterSpacing: '-0.03em',
-                        lineHeight: 1.1,
-                        marginBottom: '0.8rem'
+                        letterSpacing: '-0.02em',
+                        lineHeight: 1.15,
+                        color: '#ffffff'
                       }}
                     >
                       {project.name}
                     </h3>
 
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.98rem', lineHeight: 1.65 }}>
+                      {project.shortDescription}
+                    </p>
+
                     <div
                       style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '0.82rem',
-                        fontWeight: 700,
-                        letterSpacing: '0.08em',
-                        textTransform: 'uppercase',
-                        opacity: 0.75,
-                        marginBottom: '1.5rem'
+                        padding: '0.85rem 1rem',
+                        borderRadius: 'var(--radius-sm)',
+                        background: 'rgba(0, 240, 255, 0.04)',
+                        borderLeft: '3px solid #00f0ff',
+                        fontSize: '0.86rem',
+                        color: '#e2e8f0',
+                        lineHeight: 1.5
                       }}
                     >
-                      {project.category} • {project.role}
+                      <strong>Impact: </strong>{project.problemSolved}
                     </div>
 
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                    {/* Tech Badges */}
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginTop: '0.4rem' }}>
                       {project.tags.map((tag, tIdx) => (
-                        <span
-                          key={tIdx}
-                          style={{
-                            fontFamily: 'var(--font-mono)',
-                            fontSize: '0.75rem',
-                            padding: '0.2rem 0.6rem',
-                            borderRadius: '4px',
-                            background: isLightCard ? 'rgba(0, 0, 0, 0.08)' : 'rgba(255, 255, 255, 0.1)',
-                            color: isLightCard ? '#070707' : '#ffffff'
-                          }}
-                        >
+                        <span key={tIdx} className="tag-badge">
                           {tag}
                         </span>
                       ))}
                     </div>
-                  </div>
 
-                  {/* Right Description & Action Buttons */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                    <p
-                      style={{
-                        fontSize: '1rem',
-                        lineHeight: 1.6,
-                        opacity: 0.85
-                      }}
-                    >
-                      {project.shortDescription}
-                    </p>
-
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    {/* Buttons */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '0.8rem' }}>
                       <button
                         onClick={() => setSelectedProject(project)}
-                        style={{
-                          padding: '0.65rem 1.2rem',
-                          borderRadius: 'var(--radius-sm)',
-                          border: isLightCard ? '1px solid #070707' : '1px solid #ffffff',
-                          background: isLightCard ? '#070707' : '#ffffff',
-                          color: isLightCard ? '#ffffff' : '#070707',
-                          fontWeight: 600,
-                          fontSize: '0.88rem',
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.4rem'
-                        }}
+                        className="btn btn-cyber-cyan btn-sm"
                       >
                         <Eye size={15} />
-                        <span>View Details</span>
+                        <span>VIEW DETAILS</span>
                       </button>
 
                       <a
                         href={project.githubLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{
-                          color: isLightCard ? '#070707' : '#ffffff',
-                          textDecoration: 'none',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.4rem',
-                          fontSize: '0.88rem',
-                          fontWeight: 600
-                        }}
+                        className="btn btn-cyber-outline btn-sm"
                       >
-                        <GithubIcon size={16} />
-                        <span>Repo</span>
+                        <GithubIcon size={15} />
+                        <span>GITHUB REPO</span>
                         <ArrowUpRight size={14} />
                       </a>
                     </div>
@@ -281,6 +292,17 @@ const Projects = () => {
         )}
 
       </div>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .project-card-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+        .project-image-wrapper:hover img {
+          transform: scale(1.05);
+        }
+      `}</style>
     </section>
   );
 };

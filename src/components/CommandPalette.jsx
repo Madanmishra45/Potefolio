@@ -12,8 +12,6 @@ const CommandPalette = ({ isOpen, onClose, addToast }) => {
         e.preventDefault();
         if (isOpen) {
           onClose();
-        } else {
-          // Trigger open handled by parent
         }
       }
       if (e.key === 'Escape' && isOpen) {
@@ -34,13 +32,14 @@ const CommandPalette = ({ isOpen, onClose, addToast }) => {
   const sections = [
     { title: 'Home / Hero', icon: Hash, action: () => scrollToId('home') },
     { title: 'About Me', icon: Hash, action: () => scrollToId('about') },
-    { title: 'Education Timeline', icon: Hash, action: () => scrollToId('education') },
     { title: 'Technical Skills Matrix', icon: Hash, action: () => scrollToId('skills') },
     { title: 'Featured Projects Showcase', icon: Hash, action: () => scrollToId('projects') },
     { title: 'Work & Leadership Experience', icon: Hash, action: () => scrollToId('experience') },
-    { title: 'Certifications & Badges', icon: Hash, action: () => scrollToId('certifications') },
-    { title: 'Coding Profiles Stats', icon: Code, action: () => scrollToId('profiles') },
-    { title: 'Contact Me', icon: Mail, action: () => scrollToId('contact') },
+    { title: 'Academic Qualifications', icon: Hash, action: () => scrollToId('education') },
+    { title: 'Achievements & Milestones', icon: Hash, action: () => scrollToId('achievements') },
+    { title: 'Verified Credentials', icon: Hash, action: () => scrollToId('certifications') },
+    { title: 'Coding Profiles Matrix', icon: Code, action: () => scrollToId('profiles') },
+    { title: 'Contact & Collaboration', icon: Mail, action: () => scrollToId('contact') },
   ];
 
   const actions = [
@@ -49,14 +48,14 @@ const CommandPalette = ({ isOpen, onClose, addToast }) => {
       icon: Mail,
       action: () => {
         navigator.clipboard.writeText(personalInfo.email);
-        addToast('Email copied to clipboard!', 'success');
+        if (addToast) addToast('Email copied to clipboard!', 'success');
       }
     },
     {
       title: 'Download Resume PDF',
       icon: FileText,
       action: () => {
-        addToast('Downloading Resume PDF...', 'info');
+        if (addToast) addToast('Opening Resume PDF...', 'info');
         window.open(personalInfo.resumeUrl, '_blank');
       }
     },
@@ -90,11 +89,11 @@ const CommandPalette = ({ isOpen, onClose, addToast }) => {
     <div className="cmd-palette-backdrop" onClick={onClose}>
       <div className="cmd-palette-box" onClick={(e) => e.stopPropagation()}>
         {/* Search Header */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', padding: '1rem 1.25rem', borderBottom: '1px solid var(--border-color)' }}>
-          <Search size={20} style={{ color: 'var(--accent-cyan)' }} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', padding: '1rem 1.25rem', borderBottom: '1px solid rgba(0, 240, 255, 0.2)' }}>
+          <Search size={20} style={{ color: '#00f0ff' }} />
           <input
             type="text"
-            placeholder="Type a command, search section, or project..."
+            placeholder="Type a command, section name, or project..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             autoFocus
@@ -130,8 +129,8 @@ const CommandPalette = ({ isOpen, onClose, addToast }) => {
           {/* Quick Actions */}
           {filteredActions.length > 0 && (
             <div style={{ marginBottom: '1rem' }}>
-              <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-dim)', padding: '0.3rem 0.6rem', textTransform: 'uppercase' }}>
-                Actions & Quick Links
+              <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#00f0ff', padding: '0.3rem 0.6rem', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
+                ACTIONS & LINKS
               </div>
               {filteredActions.map((item, idx) => {
                 const IconComponent = item.icon;
@@ -143,7 +142,7 @@ const CommandPalette = ({ isOpen, onClose, addToast }) => {
                       display: 'flex',
                       alignItems: 'center',
                       gap: '0.8rem',
-                      padding: '0.6rem 0.8rem',
+                      padding: '0.65rem 0.8rem',
                       borderRadius: 'var(--radius-sm)',
                       cursor: 'pointer',
                       fontSize: '0.9rem',
@@ -151,7 +150,7 @@ const CommandPalette = ({ isOpen, onClose, addToast }) => {
                       transition: 'all 0.15s ease'
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 'rgba(6, 182, 212, 0.12)';
+                      e.currentTarget.style.background = 'rgba(0, 240, 255, 0.12)';
                       e.currentTarget.style.color = '#ffffff';
                     }}
                     onMouseLeave={(e) => {
@@ -159,7 +158,7 @@ const CommandPalette = ({ isOpen, onClose, addToast }) => {
                       e.currentTarget.style.color = 'var(--text-main)';
                     }}
                   >
-                    <IconComponent size={16} style={{ color: 'var(--accent-cyan)' }} />
+                    <IconComponent size={16} style={{ color: '#00f0ff' }} />
                     <span style={{ flex: 1 }}>{item.title}</span>
                     <ExternalLink size={14} style={{ color: 'var(--text-dim)' }} />
                   </div>
@@ -171,8 +170,8 @@ const CommandPalette = ({ isOpen, onClose, addToast }) => {
           {/* Navigation Sections */}
           {filteredSections.length > 0 && (
             <div style={{ marginBottom: '1rem' }}>
-              <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-dim)', padding: '0.3rem 0.6rem', textTransform: 'uppercase' }}>
-                Navigation Sections
+              <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#a855f7', padding: '0.3rem 0.6rem', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
+                NAVIGATION SECTIONS
               </div>
               {filteredSections.map((item, idx) => {
                 const IconComponent = item.icon;
@@ -184,7 +183,7 @@ const CommandPalette = ({ isOpen, onClose, addToast }) => {
                       display: 'flex',
                       alignItems: 'center',
                       gap: '0.8rem',
-                      padding: '0.6rem 0.8rem',
+                      padding: '0.65rem 0.8rem',
                       borderRadius: 'var(--radius-sm)',
                       cursor: 'pointer',
                       fontSize: '0.9rem',
@@ -192,7 +191,7 @@ const CommandPalette = ({ isOpen, onClose, addToast }) => {
                       transition: 'all 0.15s ease'
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 'rgba(99, 102, 241, 0.12)';
+                      e.currentTarget.style.background = 'rgba(168, 85, 247, 0.12)';
                       e.currentTarget.style.color = '#ffffff';
                     }}
                     onMouseLeave={(e) => {
@@ -200,7 +199,7 @@ const CommandPalette = ({ isOpen, onClose, addToast }) => {
                       e.currentTarget.style.color = 'var(--text-main)';
                     }}
                   >
-                    <IconComponent size={16} style={{ color: 'var(--accent-indigo)' }} />
+                    <IconComponent size={16} style={{ color: '#a855f7' }} />
                     <span style={{ flex: 1 }}>{item.title}</span>
                   </div>
                 );
@@ -211,8 +210,8 @@ const CommandPalette = ({ isOpen, onClose, addToast }) => {
           {/* Projects Search Results */}
           {filteredProjects.length > 0 && (
             <div>
-              <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-dim)', padding: '0.3rem 0.6rem', textTransform: 'uppercase' }}>
-                Projects ({filteredProjects.length})
+              <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#10b981', padding: '0.3rem 0.6rem', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
+                PROJECTS ({filteredProjects.length})
               </div>
               {filteredProjects.map((p) => (
                 <div
@@ -224,7 +223,7 @@ const CommandPalette = ({ isOpen, onClose, addToast }) => {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '0.8rem',
-                    padding: '0.6rem 0.8rem',
+                    padding: '0.65rem 0.8rem',
                     borderRadius: 'var(--radius-sm)',
                     cursor: 'pointer',
                     fontSize: '0.9rem',
@@ -240,9 +239,9 @@ const CommandPalette = ({ isOpen, onClose, addToast }) => {
                     e.currentTarget.style.color = 'var(--text-main)';
                   }}
                 >
-                  <Folder size={16} style={{ color: 'var(--accent-emerald)' }} />
+                  <Folder size={16} style={{ color: '#10b981' }} />
                   <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                    <span style={{ fontWeight: 500 }}>{p.name}</span>
+                    <span style={{ fontWeight: 600 }}>{p.name}</span>
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>{p.category}</span>
                   </div>
                 </div>
@@ -253,7 +252,7 @@ const CommandPalette = ({ isOpen, onClose, addToast }) => {
         </div>
 
         {/* Footer Hint */}
-        <div style={{ padding: '0.6rem 1.25rem', borderTop: '1px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-dim)' }}>
+        <div style={{ padding: '0.6rem 1.25rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
           <span>Press <kbd style={{ background: 'rgba(255,255,255,0.1)', padding: '0.1rem 0.4rem', borderRadius: '4px', color: '#fff' }}>Esc</kbd> to close</span>
           <span><kbd style={{ background: 'rgba(255,255,255,0.1)', padding: '0.1rem 0.4rem', borderRadius: '4px', color: '#fff' }}>Ctrl + K</kbd> anytime</span>
         </div>
