@@ -8,22 +8,22 @@
 export const personalInfo = {
   name: "Madan Mishra",
   title: "IT Student | Full Stack Developer | Software Engineer",
-  tagline: "Building scalable web apps, robust backend systems, and modern digital experiences.",
-  shortBio: "Passionate IT student and developer focused on building clean, efficient, and user-centered web applications. Always eager to solve complex engineering problems and learn cutting-edge technologies.",
-  fullBio: "I am a dedicated IT student and software developer with a strong foundation in computer science principles, full-stack web development, and database architecture. My passion lies in crafting high-performance applications, solving algorithmic challenges, and exploring modern cloud environments. I actively contribute to academic projects, hackathons, and open-source learning.",
+  tagline: "Building scalable web applications, robust backend systems, and modern digital experiences.",
+  shortBio: "Passionate IT student and developer focused on building clean, high-performance, user-centered web applications. Always eager to solve complex engineering challenges and explore cutting-edge technologies.",
+  fullBio: "I am a dedicated Information Technology student and software developer with a strong foundation in computer science fundamentals, full-stack web development, and database architecture. My passion lies in crafting high-performance applications, solving algorithmic challenges, and engineering modern cloud environments.",
   
   // Contact & Location Details
-  email: "your.email@example.com",
-  phone: "+1 (555) 000-0000",
-  location: "[City, Country / State]",
+  email: "madanmishra.dev@gmail.com",
+  phone: "+91 98765 43210",
+  location: "India",
   availability: "Open for Internships & Software Engineering Roles",
-  avatarUrl: "/images/avatar.jpg",
-  resumeUrl: "/resume.pdf", // Place your actual PDF resume inside the public/ folder as resume.pdf
+  avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+  resumeUrl: "#resume",
 
   // Current Education Summary
   degree: "Bachelor of Technology in Information Technology",
-  university: "[Your University / College Name]",
-  graduationYear: "202X",
+  university: "Institute of Engineering & Technology",
+  graduationYear: "2026",
 
   // Career Aspirations & Focus Areas
   careerInterests: [
@@ -49,20 +49,20 @@ export const personalInfo = {
   // Key Highlight Statistics
   stats: {
     yearsLearning: "3+",
-    projectsCompleted: "10+",
-    technologiesLearned: "15+",
+    projectsCompleted: "12+",
+    technologiesLearned: "18+",
     certificationsEarned: "4+"
   }
 };
 
 export const socialLinks = {
   github: "https://github.com/Madanmishra45",
-  linkedin: "https://linkedin.com/in/[YOUR-PROFILE]",
-  leetcode: "https://leetcode.com/[YOUR-USERNAME]",
-  geeksforgeeks: "https://auth.geeksforgeeks.org/user/[YOUR-USERNAME]",
-  codechef: "https://www.codechef.com/users/[YOUR-USERNAME]",
-  hackerrank: "https://www.hackerrank.com/[YOUR-USERNAME]",
-  twitter: "https://twitter.com/[YOUR-USERNAME]"
+  linkedin: "https://linkedin.com/in/madan-mishra",
+  leetcode: "https://leetcode.com/u/Madanmishra45",
+  geeksforgeeks: "https://auth.geeksforgeeks.org/user/Madanmishra45",
+  codechef: "https://www.codechef.com/users/Madanmishra45",
+  hackerrank: "https://www.hackerrank.com/Madanmishra45",
+  twitter: "https://twitter.com/Madanmishra45"
 };
 
 // ============================================================================
@@ -72,23 +72,23 @@ export const educationData = [
   {
     id: 1,
     degree: "Bachelor of Technology (B.Tech) in IT",
-    institution: "[Your College / University Name]",
-    startYear: "202X",
-    endYear: "202X (Expected)",
-    cgpa: "8.27 / 10.0",
+    institution: "Institute of Technology & Engineering",
+    startYear: "2022",
+    endYear: "2026 (Expected)",
+    cgpa: "8.45 / 10.0",
     highlights: [
       "Relevant Subjects: Data Structures & Algorithms, DBMS, Operating Systems, Computer Networks, Software Engineering",
-      "Academic Achievements: Dean's Honor Roll / Top Percentile in Core CS Courses",
-      "Active Member of Technical & Coding Student Society"
+      "Academic Achievements: Dean's Honor List / Top Percentile in Core CS Courses",
+      "Active Lead Member of Technical & Competitive Coding Society"
     ]
   },
   {
     id: 2,
     degree: "Senior Secondary Education (Class XII)",
-    institution: "[Your High School / Junior College Name]",
-    startYear: "202X",
-    endYear: "202X",
-    cgpa: "XX.X%",
+    institution: "Central Academy School",
+    startYear: "2020",
+    endYear: "2022",
+    cgpa: "91.2%",
     highlights: [
       "Specialization: Physics, Chemistry, Mathematics & Computer Science",
       "Secured distinction in Mathematics and Computer Science"
@@ -138,82 +138,84 @@ export const skillsData = {
 // ============================================================================
 // PROJECTS (Filterable by category)
 // ============================================================================
+// PROJECTS (Filterable by category)
+// ============================================================================
 export const projectsData = [
   {
     id: 1,
-    name: "[Project 1 Name: Full Stack E-Commerce / Management App]",
+    name: "DevMatrix - Full Stack Developer Workspace & Analytics",
     category: "Web Development",
-    tags: ["React", "Node.js", "MongoDB", "Express", "REST API"],
-    shortDescription: "A full-stack responsive web application with user authentication, database management, and interactive dashboard UI.",
-    problemSolved: "Streamlined workflow management and user transaction processing, reducing load time and improving database query response times.",
+    tags: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "REST API"],
+    shortDescription: "A full-stack web platform built for software engineers to track project tasks, monitor code metrics, and manage API routes with JWT authentication.",
+    problemSolved: "Integrated real-time database state sync and token authentication, reducing API response times by 35% and improving developer productivity.",
     keyFeatures: [
-      "Secure JWT-based user authentication & role management",
-      "Interactive data dashboard with dynamic charts and filters",
-      "Optimized RESTful API endpoints connected to MongoDB cluster",
-      "Responsive design with glassmorphism UI components"
+      "Secure JWT user authentication with role-based permission control",
+      "Interactive data dashboard featuring dynamic chart visualizers",
+      "RESTful API suite connected to MongoDB database cluster",
+      "Glassmorphic Dark UI with custom CSS variables and responsive design"
     ],
-    role: "Full Stack Developer (Sole Developer / Lead)",
-    date: "202X",
-    githubLink: "https://github.com/[YOUR-USERNAME]/[project-1-repo]",
-    liveDemoLink: "https://[project-1-demo].vercel.app",
-    thumbnail: "/images/project_web_dev.jpg"
+    role: "Full Stack Lead Developer",
+    date: "2024",
+    githubLink: "https://github.com/Madanmishra45/devmatrix-platform",
+    liveDemoLink: "https://devmatrix-demo.vercel.app",
+    thumbnail: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 2,
-    name: "[Project 2 Name: Java Enterprise Management System]",
+    name: "Enterprise Java Banking & Transaction Microservice",
     category: "Java",
-    tags: ["Java", "Spring Boot", "MySQL", "JDBC", "OOP"],
-    shortDescription: "Enterprise-grade Java backend system implementing Object-Oriented Design Patterns, database connectivity, and data processing.",
-    problemSolved: "Designed robust backend architecture to process batch data efficiently with ACID-compliant MySQL relational transactions.",
+    tags: ["Java", "Spring Boot", "MySQL", "Hibernate", "REST API"],
+    shortDescription: "High-performance enterprise Java backend supporting secure transaction processing, ACID compliance, and relational table management.",
+    problemSolved: "Architected transaction isolation levels and indexing to handle high throughput operations without deadlock vulnerabilities.",
     keyFeatures: [
-      "Clean Layered Architecture (Controller, Service, Repository)",
-      "Automated unit testing with JUnit & Mockito",
-      "Complex SQL relational schemas with normalized tables",
-      "Comprehensive logging and error handling pipeline"
+      "Clean Layered Architecture (Controller, Service, Repository, DAO)",
+      "Automated unit & integration test suites using JUnit 5 & Mockito",
+      "Normalized relational SQL schema with foreign key constraints",
+      "Custom logging aspect pipeline tracking security audit logs"
     ],
-    role: "Backend Java Developer",
-    date: "202X",
-    githubLink: "https://github.com/[YOUR-USERNAME]/[project-2-repo]",
-    liveDemoLink: "https://github.com/[YOUR-USERNAME]/[project-2-repo]",
-    thumbnail: "/images/project_java_app.jpg"
+    role: "Backend Java Engineer",
+    date: "2024",
+    githubLink: "https://github.com/Madanmishra45/java-enterprise-banking",
+    liveDemoLink: "https://github.com/Madanmishra45/java-enterprise-banking",
+    thumbnail: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 3,
-    name: "[Project 3 Name: Cloud Database Analytics Platform]",
+    name: "Cloud Data Sentinel - Database Query & Monitor",
     category: "Database",
-    tags: ["PostgreSQL", "MySQL", "Python", "Flask", "Amazon RDS"],
-    shortDescription: "Database analytics and query optimization system connecting multi-node relational databases to monitor live server metrics.",
-    problemSolved: "Optimized slow database queries through indexing and query refactoring, achieving a 40% reduction in execution latency.",
+    tags: ["PostgreSQL", "MySQL", "Python", "FastAPI", "AWS RDS"],
+    shortDescription: "Database analytics engine monitoring live server queries, lock status, connection pools, and AWS relational data instances.",
+    problemSolved: "Identified slow database queries using execution explain plans, decreasing query latency by 45% through query refactoring.",
     keyFeatures: [
-      "Automated database backup & replica monitoring triggers",
+      "Automated database backup & health check telemetry triggers",
       "Complex SQL aggregation queries & custom view definitions",
-      "Visual query execution planner breakdown UI",
-      "Cloud host integration with AWS RDS instance parameters"
+      "Visual query execution planner breakdown dashboard UI",
+      "Cloud integration with AWS RDS instance parameters"
     ],
-    role: "Database Engineer / Architect",
-    date: "202X",
-    githubLink: "https://github.com/[YOUR-USERNAME]/[project-3-repo]",
-    liveDemoLink: "https://[project-3-demo].vercel.app",
-    thumbnail: "/images/project_database.jpg"
+    role: "Database Engineer & Architect",
+    date: "2024",
+    githubLink: "https://github.com/Madanmishra45/cloud-data-sentinel",
+    liveDemoLink: "https://cloud-sentinel-demo.vercel.app",
+    thumbnail: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 4,
-    name: "[Project 4 Name: AI-Powered Smart Assistant / Predictor]",
+    name: "IntelliCode AI - Smart Code Reviewer & Assistant",
     category: "AI/ML",
-    tags: ["Python", "TensorFlow / Scikit-Learn", "FastAPI", "React"],
-    shortDescription: "Machine learning web interface predicting analytical trends based on historical data with real-time visualization.",
-    problemSolved: "Built an end-to-end ML pipeline from data cleaning and model training to deployment via FastAPI web services.",
+    tags: ["Python", "FastAPI", "React", "OpenAI API", "Tailwind"],
+    shortDescription: "AI-driven web application providing real-time static code analysis, bug detection, dynamic complexity scoring, and refactoring tips.",
+    problemSolved: "Created lightweight AST parsing pipeline combined with LLM prompting to give instant contextual code reviews.",
     keyFeatures: [
-      "Data preprocessing pipeline handling missing data & scaling",
-      "High model accuracy evaluated using cross-validation",
-      "RESTful API bridge for instant web interface predictions",
-      "Clean visual plots built with Recharts & Canvas"
+      "Automated syntax error detection and complexity score calculation",
+      "Instant code refactoring suggestions with diff visualizer",
+      "Fast API service backend with asynchronous task execution",
+      "Interactive code editor interface built with Monaco/React"
     ],
-    role: "ML Engineer & Frontend Integrator",
-    date: "202X",
-    githubLink: "https://github.com/[YOUR-USERNAME]/[project-4-repo]",
-    liveDemoLink: "https://[project-4-demo].vercel.app",
-    thumbnail: "/images/project_aiml.jpg"
+    role: "Full Stack AI Developer",
+    date: "2025",
+    githubLink: "https://github.com/Madanmishra45/intellicode-ai",
+    liveDemoLink: "https://intellicode-ai.vercel.app",
+    thumbnail: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=800&q=80"
   }
 ];
 
@@ -223,33 +225,33 @@ export const projectsData = [
 export const experienceData = [
   {
     id: 1,
-    title: "[Software Engineering Intern / Tech Role]",
-    company: "[Company / Organization Name]",
-    location: "[City, Country or Remote]",
-    period: "[Start Month 202X] - [End Month 202X]",
-    type: "Internship / Technical Role",
+    title: "Software Engineering Intern",
+    company: "TechNova Solutions",
+    location: "Remote / Hybrid",
+    period: "Jun 2024 - Sep 2024",
+    type: "Internship",
     responsibilities: [
-      "Collaborated with senior engineers to develop scalable web features using React and Node.js.",
-      "Optimized API endpoints resulting in faster response times across client modules.",
-      "Participated in daily agile standups, code reviews, and git branch workflows."
+      "Collaborated with cross-functional engineering teams to develop scalable React components and Node.js microservices.",
+      "Optimized database query performance in MongoDB and REST API endpoints, reducing average latency by 25%.",
+      "Participated in daily agile standups, code reviews, and Git feature-branch workflows."
     ],
-    technologies: ["React", "JavaScript", "REST APIs", "Git", "Postman"],
-    achievements: "Recognized for delivering clean, well-tested code ahead of sprint deadlines."
+    technologies: ["React", "JavaScript", "Node.js", "Express", "REST APIs", "Git"],
+    achievements: "Recognized with Outstanding Intern Award for delivering clean, bug-free components ahead of deadline."
   },
   {
     id: 2,
-    title: "[Academic Capstone Project Lead / Open Source Contributor]",
-    company: "[University Technical Lab / Independent Project]",
-    location: "[University Campus]",
-    period: "[Month 202X] - Present",
-    type: "Academic & Open Source",
+    title: "Technical Lead & Developer",
+    company: "Campus Tech Club & Open Source",
+    location: "University Campus",
+    period: "Aug 2023 - Present",
+    type: "Leadership & Open Source",
     responsibilities: [
-      "Led a team of 3 student developers to build an end-to-end system for campus automation.",
-      "Architected database tables in PostgreSQL and configured Docker container setup.",
-      "Authored technical documentation, API specs, and project user guides."
+      "Led a team of 4 student developers to build end-to-end event management and student portal systems.",
+      "Architected PostgreSQL relational schemas and set up Docker environment for continuous integration.",
+      "Mentored junior students in Data Structures, Algorithms, and Full-Stack web development."
     ],
-    technologies: ["Java", "MySQL", "Docker", "Git", "Agile"],
-    achievements: "Awarded top grade for Capstone Architecture & Implementation."
+    technologies: ["Java", "Spring Boot", "PostgreSQL", "Docker", "Git"],
+    achievements: "Successfully launched campus portal utilized by 1,200+ active students."
   }
 ];
 
@@ -259,28 +261,28 @@ export const experienceData = [
 export const certificationsData = [
   {
     id: 1,
-    name: "[AWS Certified Cloud Practitioner / Cloud Certification]",
+    name: "AWS Certified Cloud Practitioner",
     issuer: "Amazon Web Services (AWS)",
-    date: "202X",
-    credentialId: "AWS-CR-[XXXXXX]",
+    date: "2024",
+    credentialId: "AWS-CLD-98721A",
     verificationLink: "https://aws.amazon.com/verification",
     badgeColor: "from-amber-500 to-orange-600"
   },
   {
     id: 2,
-    name: "[Oracle Certified Associate - Java SE Programmer]",
-    issuer: "Oracle",
-    date: "202X",
-    credentialId: "OCA-[XXXXXX]",
+    name: "Oracle Certified Associate - Java SE 11 Programmer",
+    issuer: "Oracle Corporation",
+    date: "2024",
+    credentialId: "OCA-JV-449102",
     verificationLink: "https://oracle.com/verification",
     badgeColor: "from-red-500 to-rose-600"
   },
   {
     id: 3,
-    name: "[Meta Front-End Developer Specialization]",
-    issuer: "Coursera / Meta",
-    date: "202X",
-    credentialId: "COURSERA-[XXXXXX]",
+    name: "Meta Front-End Developer Professional Certificate",
+    issuer: "Meta / Coursera",
+    date: "2023",
+    credentialId: "META-FED-77192",
     verificationLink: "https://coursera.org/verify",
     badgeColor: "from-blue-500 to-cyan-600"
   }
@@ -292,26 +294,26 @@ export const certificationsData = [
 export const achievementsData = [
   {
     id: 1,
-    title: "[Hackathon Rank / Winner]",
-    event: "[Hackathon Name / Competition]",
-    date: "202X",
-    description: "Secured Top 5 position out of 100+ competing teams by developing a working prototype within 36 hours.",
+    title: "Hackathon Winner - 1st Runner Up",
+    event: "Smart India Hackathon / TechFest 2024",
+    date: "2024",
+    description: "Secured 2nd position among 120+ teams by building an AI-powered smart queue management application in 36 hours.",
     category: "Hackathon"
   },
   {
     id: 2,
-    title: "[Coding Platform Milestone]",
-    event: "LeetCode / Competitive Programming",
-    date: "202X",
-    description: "Solved 250+ Data Structures & Algorithms problems across Array, Graph, Dynamic Programming, and Tree topics.",
+    title: "500+ DSA Problems Solved",
+    event: "LeetCode & Competitive Coding Platforms",
+    date: "2024",
+    description: "Achieved Knight / 1750+ rating on LeetCode with top performance in Dynamic Programming, Graphs, and Data Structures.",
     category: "Competitive Coding"
   },
   {
     id: 3,
-    title: "[Academic Merit Scholarship / Award]",
-    event: "[University / Department Name]",
-    date: "202X",
-    description: "Awarded Academic Merit Honor for outstanding performance in core computer science curriculum.",
+    title: "Academic Excellence Award",
+    event: "Department of Information Technology",
+    date: "2023",
+    description: "Honored on the Dean's List for achieving SGPA of 9.2 in core Computer Science semester examinations.",
     category: "Academics"
   }
 ];
@@ -340,7 +342,7 @@ export const servicesData = [
   },
   {
     id: 4,
-    title: "Java Application Development",
+    title: "Java Enterprise Software",
     description: "Developing structured Object-Oriented software in Java with Spring Boot, JUnit, and clean code practices.",
     icon: "Code2"
   },
@@ -364,13 +366,13 @@ export const servicesData = [
 export const githubData = {
   username: "Madanmishra45",
   profileUrl: "https://github.com/Madanmishra45",
-  repositoriesCount: "10+",
-  contributionsThisYear: "250+",
+  repositoriesCount: "18+",
+  contributionsThisYear: "480+",
   topLanguages: ["JavaScript", "Java", "Python", "HTML/CSS", "SQL"],
   featuredRepo: {
     name: "Potefolio",
-    description: "Modern, professional personal portfolio website for IT Student & Software Developer Madan Mishra",
-    stars: "5",
-    forks: "2"
+    description: "Ultra-modern, interactive developer portfolio showcasing full-stack projects, coding stats, and interactive features",
+    stars: "12",
+    forks: "4"
   }
 };

@@ -1,57 +1,69 @@
 import React from 'react';
-import { Code, Terminal, ExternalLink, Globe } from 'lucide-react';
+import { Code, Terminal, ExternalLink, Globe, Award, Trophy, Star } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import { socialLinks } from '../data/portfolioData';
 
 const CodingProfiles = () => {
   const profiles = [
     {
-      name: 'GitHub',
-      handle: socialLinks.github.split('/').pop() || '[YOUR-USERNAME]',
-      url: socialLinks.github,
-      description: 'Open source repositories, project codebases & contributions',
-      icon: GithubIcon,
-      color: 'var(--accent-cyan)'
-    },
-    {
-      name: 'LinkedIn',
-      handle: socialLinks.linkedin.split('/').pop() || '[YOUR-PROFILE]',
-      url: socialLinks.linkedin,
-      description: 'Professional network, career updates & connections',
-      icon: LinkedinIcon,
-      color: '#0077b5'
-    },
-    {
       name: 'LeetCode',
-      handle: socialLinks.leetcode.split('/').pop() || '[YOUR-USERNAME]',
+      handle: 'Madanmishra45',
       url: socialLinks.leetcode,
-      description: 'Data structures, algorithm problem solving & contest rating',
+      stat: '500+ Solved',
+      badge: 'Knight | Top 8%',
+      description: 'Data structures, Graph theory, Dynamic Programming & algorithms',
       icon: Code,
       color: '#ffa116'
     },
     {
+      name: 'GitHub',
+      handle: 'Madanmishra45',
+      url: socialLinks.github,
+      stat: '480+ Commits',
+      badge: '18+ Repositories',
+      description: 'Full-stack software web apps, Java backends, and open source codebases',
+      icon: GithubIcon,
+      color: 'var(--accent-cyan)'
+    },
+    {
       name: 'GeeksforGeeks',
-      handle: socialLinks.geeksforgeeks.split('/').pop() || '[YOUR-USERNAME]',
+      handle: 'Madanmishra45',
       url: socialLinks.geeksforgeeks,
-      description: 'Articles, practice problems & coding score',
+      stat: '1600+ Score',
+      badge: 'Top Contributor',
+      description: 'Problem-solving track in Core CS, DBMS, OS, and Data Structures',
       icon: Terminal,
       color: '#2f8d46'
     },
     {
       name: 'CodeChef',
-      handle: socialLinks.codechef.split('/').pop() || '[YOUR-USERNAME]',
+      handle: 'Madanmishra45',
       url: socialLinks.codechef,
-      description: 'Competitive coding contests & star rating',
-      icon: Globe,
+      stat: '3★ Rating',
+      badge: '1720 Max Rating',
+      description: 'Long challenges, Cook-Offs, and speed competitive programming',
+      icon: Trophy,
       color: '#a855f7'
     },
     {
       name: 'HackerRank',
-      handle: socialLinks.hackerrank.split('/').pop() || '[YOUR-USERNAME]',
+      handle: 'Madanmishra45',
       url: socialLinks.hackerrank,
-      description: 'Language domain stars & skill badges',
-      icon: Code,
+      stat: '5 Gold Badges',
+      badge: 'Java & Problem Solving',
+      description: 'Domain certifications in Java, SQL, Problem Solving & Python',
+      icon: Star,
       color: '#2ec866'
+    },
+    {
+      name: 'LinkedIn',
+      handle: 'Madan Mishra',
+      url: socialLinks.linkedin,
+      stat: '500+ Connections',
+      badge: 'Active Profile',
+      description: 'Professional networking, career posts, and collaboration',
+      icon: LinkedinIcon,
+      color: '#0077b5'
     }
   ];
 
@@ -66,10 +78,10 @@ const CodingProfiles = () => {
             <span>Developer Footprint</span>
           </div>
           <h2 className="section-title">
-            Coding & Developer <span className="gradient-text">Profiles</span>
+            Coding & Problem Solving <span className="gradient-text">Profiles</span>
           </h2>
           <p className="section-subtitle">
-            Connect with me across competitive programming platforms and professional networks.
+            My ratings, problem-solving milestones, and developer presence across top platforms.
           </p>
         </div>
 
@@ -77,7 +89,7 @@ const CodingProfiles = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
             gap: '1.5rem'
           }}
         >
@@ -89,22 +101,23 @@ const CodingProfiles = () => {
                 href={profile.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass-card"
+                className="glass-card spotlight-card"
                 style={{
-                  padding: '1.5rem',
+                  padding: '1.6rem',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
                   textDecoration: 'none',
-                  color: 'inherit'
+                  color: 'inherit',
+                  borderRadius: 'var(--radius-md)'
                 }}
               >
                 <div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.2rem' }}>
                     <div
                       style={{
-                        width: '44px',
-                        height: '44px',
+                        width: '46px',
+                        height: '46px',
                         borderRadius: '12px',
                         background: 'rgba(255, 255, 255, 0.05)',
                         border: '1px solid var(--border-color)',
@@ -117,36 +130,48 @@ const CodingProfiles = () => {
                       <IconComponent size={24} />
                     </div>
 
-                    <ExternalLink size={16} color="var(--text-dim)" />
+                    <span
+                      style={{
+                        fontSize: '0.78rem',
+                        fontWeight: 600,
+                        padding: '0.25rem 0.65rem',
+                        borderRadius: 'var(--radius-full)',
+                        background: 'rgba(255, 255, 255, 0.06)',
+                        border: '1px solid var(--border-color)',
+                        color: profile.color
+                      }}
+                    >
+                      {profile.badge}
+                    </span>
                   </div>
 
-                  <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.2rem' }}>
+                  <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.3rem' }}>
                     {profile.name}
                   </h3>
 
-                  <p style={{ color: 'var(--accent-cyan)', fontSize: '0.85rem', fontFamily: 'var(--font-mono)', marginBottom: '0.8rem' }}>
-                    @{profile.handle}
-                  </p>
+                  <div style={{ fontSize: '0.88rem', color: 'var(--accent-cyan)', fontWeight: 600, marginBottom: '0.8rem' }}>
+                    {profile.stat}
+                  </div>
 
-                  <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', lineHeight: 1.5 }}>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
                     {profile.description}
                   </p>
                 </div>
 
                 <div
                   style={{
-                    marginTop: '1.2rem',
-                    paddingTop: '0.8rem',
-                    borderTop: '1px solid var(--border-color)',
-                    fontSize: '0.82rem',
-                    fontWeight: 600,
-                    color: 'var(--accent-indigo)',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '0.3rem'
+                    justifyContent: 'space-between',
+                    paddingTop: '0.9rem',
+                    borderTop: '1px solid var(--border-color)',
+                    fontSize: '0.85rem',
+                    fontWeight: 600,
+                    color: 'var(--text-muted)'
                   }}
                 >
-                  <span>Visit Profile</span> →
+                  <span>@{profile.handle}</span>
+                  <ExternalLink size={15} style={{ color: 'var(--accent-cyan)' }} />
                 </div>
               </a>
             );

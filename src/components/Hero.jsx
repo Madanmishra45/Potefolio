@@ -1,249 +1,231 @@
-import React from 'react';
-import { ArrowRight, Download, Mail, Terminal, Sparkles, Code2, MapPin } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ArrowDown, Terminal, Copy, Check, Download, ArrowUpRight, Code } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 
-const Hero = () => {
+const codeSnippets = {
+  'identity.json': `{
+  "developer": "${personalInfo.name}",
+  "role": "Full Stack Engineer & Interface Developer",
+  "focus": "Visual Systems & Software Architecture",
+  "status": "Available for selected collaborations",
+  "stack": ["React", "Node.js", "Java", "PostgreSQL"]
+}`,
+  'manifesto.ts': `export const principles = [
+  "Clarity over complexity",
+  "Performance & precise typography",
+  "Interfaces that feel inevitable"
+];`
+};
+
+const Hero = ({ addToast }) => {
+  const [activeTab, setActiveTab] = useState('identity.json');
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyCode = () => {
+    navigator.clipboard.writeText(codeSnippets[activeTab]);
+    setCopied(true);
+    if (addToast) addToast(`Copied ${activeTab}`, 'success');
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <section
       id="home"
       className="section"
       style={{
-        minHeight: '100vh',
+        minHeight: '92vh',
         display: 'flex',
         alignItems: 'center',
-        paddingTop: '7rem',
-        position: 'relative',
-        overflow: 'hidden'
+        paddingTop: '8rem',
+        paddingBottom: '4rem',
+        position: 'relative'
       }}
     >
-      {/* Background Radial Glow */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '20%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '600px',
-          height: '600px',
-          background: 'radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(99, 102, 241, 0.08) 40%, transparent 70%)',
-          pointerEvents: 'none',
-          zIndex: 0
-        }}
-      />
-
-      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '3.5rem', alignItems: 'center' }}>
+      <div className="container">
+        <div style={{ display: 'grid', gridTemplateColumns: '1.25fr 0.75fr', gap: '4rem', alignItems: 'center' }}>
           
-          {/* Left Text Column */}
+          {/* Left Column: Editorial Display Typography (From Screenshot) */}
           <div>
-            {/* Status Badge */}
+            
+            {/* Top Minimalist Tag */}
             <div
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.6rem',
-                padding: '0.4rem 1rem',
-                borderRadius: 'var(--radius-full)',
-                background: 'rgba(16, 185, 129, 0.1)',
-                border: '1px solid rgba(16, 185, 129, 0.3)',
-                color: 'var(--accent-emerald)',
+                gap: '0.5rem',
                 fontSize: '0.85rem',
-                fontWeight: 600,
-                marginBottom: '1.5rem'
+                color: 'var(--text-muted)',
+                marginBottom: '2rem',
+                fontFamily: 'var(--font-mono)'
               }}
             >
-              <span
-                style={{
-                  width: '8px',
-                  height: '8px',
-                  borderRadius: '50%',
-                  background: 'var(--accent-emerald)',
-                  boxShadow: '0 0 10px var(--accent-emerald)'
-                }}
-              />
-              <span>{personalInfo.availability}</span>
+              <span>{personalInfo.name}</span>
             </div>
 
-            {/* Main Greeting & Name */}
+            {/* Giant Editorial Headline */}
             <h1
+              className="editorial-headline"
               style={{
-                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                fontSize: 'clamp(2.8rem, 5.5vw, 4.8rem)',
                 fontWeight: 800,
-                lineHeight: 1.15,
-                letterSpacing: '-0.03em',
-                marginBottom: '1rem'
+                letterSpacing: '-0.04em',
+                lineHeight: 1.05,
+                color: '#ffffff',
+                marginBottom: '2rem',
+                maxWidth: '850px'
               }}
             >
-              Hi, I'm <span className="gradient-text">{personalInfo.name}</span>
+              I build clear identities and digital experiences for ideas that deserve attention.
             </h1>
 
-            {/* Professional Title */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                color: 'var(--accent-cyan)',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '1.2rem',
-                fontWeight: 600,
-                marginBottom: '1.5rem'
-              }}
-            >
-              <Terminal size={20} />
-              <span>{personalInfo.title}</span>
-            </div>
-
-            {/* Short Introduction */}
+            {/* Subtitle Paragraph */}
             <p
               style={{
                 color: 'var(--text-muted)',
                 fontSize: '1.15rem',
-                lineHeight: 1.7,
+                lineHeight: 1.65,
+                marginBottom: '3rem',
                 maxWidth: '620px',
-                marginBottom: '2rem'
+                fontWeight: 400
               }}
             >
-              {personalInfo.shortBio}
+              Independent developer & full-stack engineer focused on visual systems, thoughtful interfaces, and the quiet details that make work feel inevitable.
             </p>
 
-            {/* Location & Quick Info */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '1.5rem',
-                marginBottom: '2.5rem',
-                color: 'var(--text-dim)',
-                fontSize: '0.9rem'
-              }}
-            >
-              <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <MapPin size={16} color="var(--accent-cyan)" />
-                {personalInfo.location}
-              </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <Sparkles size={16} color="var(--accent-indigo)" />
-                {personalInfo.degree}
-              </span>
-            </div>
-
-            {/* Action Buttons */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
-              <a href="#projects" className="btn btn-primary">
-                <span>View Projects</span>
-                <ArrowRight size={18} />
+            {/* Monospaced Section Label matching screenshot: ↓ SELECTED WORK, 2024–26 */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+              <a
+                href="#projects"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.6rem',
+                  textDecoration: 'none',
+                  color: '#ffffff',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.88rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.05em',
+                  textTransform: 'uppercase',
+                  borderBottom: '1px solid rgba(255, 255, 255, 0.4)',
+                  paddingBottom: '0.3rem',
+                  transition: 'all 0.2s ease'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.borderColor = '#ffffff'}
+                onMouseLeave={(e) => e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.4)'}
+              >
+                <span>↓ SELECTED WORK, 2024–26</span>
               </a>
 
-              <a href="#contact" className="btn btn-secondary">
-                <Mail size={18} />
-                <span>Contact Me</span>
-              </a>
-
-              <a href={personalInfo.resumeUrl} download className="btn btn-outline">
-                <Download size={18} />
-                <span>Download Resume</span>
+              <a
+                href={personalInfo.resumeUrl}
+                download
+                className="btn btn-outline btn-sm"
+              >
+                <Download size={14} />
+                <span>Resume PDF</span>
               </a>
             </div>
 
           </div>
 
-          {/* Right Avatar Halo / Tech Display */}
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          {/* Right Column: Monochrome High-Contrast IDE Snippet Window */}
+          <div>
             <div
-              className="animate-float"
+              className="glass-card"
               style={{
-                position: 'relative',
-                width: '320px',
-                height: '320px',
-                borderRadius: '30px',
-                background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(99, 102, 241, 0.15))',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                backdropFilter: 'blur(20px)',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '2rem',
-                boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5), 0 0 40px rgba(6, 182, 212, 0.2)'
+                background: '#0d0d0d',
+                border: '1px solid rgba(255, 255, 255, 0.18)',
+                borderRadius: 'var(--radius-md)',
+                overflow: 'hidden',
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.9)'
               }}
             >
-              {/* Profile Avatar Image */}
+              {/* Window Header */}
               <div
                 style={{
-                  width: '120px',
-                  height: '120px',
-                  borderRadius: '50%',
-                  overflow: 'hidden',
-                  border: '3px solid var(--accent-cyan)',
-                  marginBottom: '1.2rem',
-                  boxShadow: '0 10px 25px rgba(6, 182, 212, 0.4)',
-                  background: 'var(--bg-surface)'
-                }}
-              >
-                <img
-                  src={personalInfo.avatarUrl}
-                  alt={personalInfo.name}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover'
-                  }}
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80';
-                  }}
-                />
-              </div>
-
-              <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.2rem' }}>
-                {personalInfo.name}
-              </h3>
-              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', textAlign: 'center', marginBottom: '1rem' }}>
-                {personalInfo.university}
-              </p>
-
-              {/* Mini Stats Pill */}
-              <div
-                style={{
+                  background: '#141414',
+                  padding: '0.75rem 1.25rem',
+                  borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
                   display: 'flex',
-                  gap: '1rem',
-                  padding: '0.5rem 1rem',
-                  borderRadius: 'var(--radius-full)',
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  border: '1px solid var(--border-color)',
-                  fontSize: '0.8rem'
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
                 }}
               >
-                <div>
-                  <strong style={{ color: 'var(--accent-cyan)' }}>{personalInfo.stats.projectsCompleted}</strong> Projects
+                <div style={{ display: 'flex', gap: '0.4rem' }}>
+                  {Object.keys(codeSnippets).map((tab) => (
+                    <button
+                      key={tab}
+                      onClick={() => setActiveTab(tab)}
+                      style={{
+                        background: activeTab === tab ? 'rgba(255, 255, 255, 0.12)' : 'transparent',
+                        border: 'none',
+                        color: activeTab === tab ? '#ffffff' : 'var(--text-muted)',
+                        padding: '0.3rem 0.65rem',
+                        borderRadius: 'var(--radius-sm)',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.78rem',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      {tab}
+                    </button>
+                  ))}
                 </div>
-                <div style={{ color: 'var(--border-color)' }}>|</div>
-                <div>
-                  <strong style={{ color: 'var(--accent-indigo)' }}>{personalInfo.stats.yearsLearning}</strong> Experience
-                </div>
+
+                <button
+                  onClick={handleCopyCode}
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    color: '#ffffff',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center'
+                  }}
+                >
+                  {copied ? <Check size={14} /> : <Copy size={14} />}
+                </button>
               </div>
+
+              {/* Code Display */}
+              <div style={{ padding: '1.25rem', background: '#090909' }}>
+                <pre
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.85rem',
+                    color: '#e2e8f0',
+                    lineHeight: 1.6,
+                    whiteSpace: 'pre-wrap'
+                  }}
+                >
+                  <code>{codeSnippets[activeTab]}</code>
+                </pre>
+              </div>
+
+              {/* Window Footer */}
+              <div
+                style={{
+                  background: '#141414',
+                  padding: '0.5rem 1.25rem',
+                  borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  fontSize: '0.75rem',
+                  color: 'var(--text-dim)',
+                  fontFamily: 'var(--font-mono)'
+                }}
+              >
+                <span>UTF-8 Monochrome</span>
+                <span style={{ color: '#ffffff' }}>● Active</span>
+              </div>
+
             </div>
           </div>
 
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 900px) {
-          #home .container > div {
-            grid-template-columns: 1fr !important;
-            text-align: center;
-          }
-          #home p {
-            margin-left: auto;
-            margin-right: auto;
-          }
-          #home .btn {
-            justify-content: center;
-          }
-        }
-      `}</style>
     </section>
   );
 };

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Mail, MapPin, Send, CheckCircle2, Copy, Check } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import { personalInfo, socialLinks } from '../data/portfolioData';
 
-const Contact = () => {
+const Contact = ({ addToast }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,30 +13,25 @@ const Contact = () => {
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(personalInfo.email);
+    setCopiedEmail(true);
+    if (addToast) addToast(`Copied ${personalInfo.email} to clipboard!`, 'success');
+    setTimeout(() => setCopiedEmail(false), 2000);
+  };
 
   const validateForm = () => {
     const newErrors = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = 'Please enter your name.';
-    }
-
+    if (!formData.name.trim()) newErrors.name = 'Please enter your name.';
     if (!formData.email.trim()) {
-      newErrors.email = 'Please enter your email address.';
+      newErrors.email = 'Please enter your email.';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address.';
     }
-
-    if (!formData.subject.trim()) {
-      newErrors.subject = 'Please enter a subject.';
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = 'Please enter your message.';
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters long.';
-    }
+    if (!formData.subject.trim()) newErrors.subject = 'Please enter a subject.';
+    if (!formData.message.trim()) newErrors.message = 'Please enter a message.';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -45,9 +40,7 @@ const Contact = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: '' }));
-    }
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
   const handleSubmit = (e) => {
@@ -55,17 +48,11 @@ const Contact = () => {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-
-    // Simulate async API contact request
     setTimeout(() => {
       setIsSubmitting(false);
-      setSubmitSuccess(true);
+      if (addToast) addToast('Thank you! Your message has been sent successfully.', 'success');
       setFormData({ name: '', email: '', subject: '', message: '' });
-
-      setTimeout(() => {
-        setSubmitSuccess(false);
-      }, 6000);
-    }, 1200);
+    }, 1000);
   };
 
   return (
@@ -82,55 +69,61 @@ const Contact = () => {
             Let's Connect & <span className="gradient-text">Collaborate</span>
           </h2>
           <p className="section-subtitle">
-            Whether you have an internship opportunity, project inquiry, or just want to connect, feel free to reach out!
+            Whether you have an internship role, project opportunity, or developer inquiry, reach out anytime!
           </p>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: '2.5rem' }}>
           
-          {/* Contact Details & Cards */}
+          {/* Left Column: Direct Info & Quick Copy */}
           <div>
-            <div className="glass-card" style={{ padding: '2rem', marginBottom: '1.5rem' }}>
+            <div className="glass-card spotlight-card" style={{ padding: '2rem', marginBottom: '1.5rem' }}>
               <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#ffffff', marginBottom: '1.5rem' }}>
-                Contact Information
+                Contact Details
               </h3>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.4rem' }}>
                 
-                {/* Email Item */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <div
-                    style={{
-                      width: '46px',
-                      height: '46px',
-                      borderRadius: '12px',
-                      background: 'rgba(6, 182, 212, 0.1)',
-                      border: '1px solid rgba(6, 182, 212, 0.25)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'var(--accent-cyan)'
-                    }}
-                  >
-                    <Mail size={22} />
-                  </div>
-                  <div>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>Email Address</span>
-                    <a
-                      href={`mailto:${personalInfo.email}`}
-                      style={{ display: 'block', fontWeight: 600, color: '#ffffff', textDecoration: 'none' }}
+                {/* Email Item with Copy Button */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <div
+                      style={{
+                        width: '44px',
+                        height: '44px',
+                        borderRadius: '12px',
+                        background: 'rgba(6, 182, 212, 0.1)',
+                        border: '1px solid rgba(6, 182, 212, 0.25)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'var(--accent-cyan)'
+                      }}
                     >
-                      {personalInfo.email}
-                    </a>
+                      <Mail size={20} />
+                    </div>
+                    <div>
+                      <span style={{ fontSize: '0.78rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>Email Address</span>
+                      <p style={{ fontWeight: 600, color: '#ffffff', fontSize: '0.95rem' }}>{personalInfo.email}</p>
+                    </div>
                   </div>
+
+                  <button
+                    onClick={handleCopyEmail}
+                    className="btn btn-secondary btn-sm"
+                    title="Copy Email Address"
+                    style={{ padding: '0.4rem 0.6rem' }}
+                  >
+                    {copiedEmail ? <Check size={16} style={{ color: 'var(--accent-emerald)' }} /> : <Copy size={16} />}
+                  </button>
                 </div>
 
-                {/* Phone Item */}
+                {/* Location */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                   <div
                     style={{
-                      width: '46px',
-                      height: '46px',
+                      width: '44px',
+                      height: '44px',
                       borderRadius: '12px',
                       background: 'rgba(99, 102, 241, 0.1)',
                       border: '1px solid rgba(99, 102, 241, 0.25)',
@@ -140,22 +133,20 @@ const Contact = () => {
                       color: 'var(--accent-indigo)'
                     }}
                   >
-                    <Phone size={22} />
+                    <MapPin size={20} />
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>Phone / Mobile</span>
-                    <p style={{ fontWeight: 600, color: '#ffffff' }}>
-                      {personalInfo.phone}
-                    </p>
+                    <span style={{ fontSize: '0.78rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>Location</span>
+                    <p style={{ fontWeight: 600, color: '#ffffff', fontSize: '0.95rem' }}>{personalInfo.location}</p>
                   </div>
                 </div>
 
-                {/* Location Item */}
+                {/* Status */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                   <div
                     style={{
-                      width: '46px',
-                      height: '46px',
+                      width: '44px',
+                      height: '44px',
                       borderRadius: '12px',
                       background: 'rgba(16, 185, 129, 0.1)',
                       border: '1px solid rgba(16, 185, 129, 0.25)',
@@ -165,137 +156,104 @@ const Contact = () => {
                       color: 'var(--accent-emerald)'
                     }}
                   >
-                    <MapPin size={22} />
+                    <CheckCircle2 size={20} />
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>Current Location</span>
-                    <p style={{ fontWeight: 600, color: '#ffffff' }}>
-                      {personalInfo.location}
-                    </p>
+                    <span style={{ fontSize: '0.78rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>Availability Status</span>
+                    <p style={{ fontWeight: 600, color: 'var(--accent-emerald)', fontSize: '0.95rem' }}>{personalInfo.availability}</p>
                   </div>
                 </div>
 
               </div>
+            </div>
 
-              {/* Social Connections */}
-              <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-color)' }}>
-                <span style={{ fontSize: '0.82rem', color: 'var(--text-dim)', display: 'block', marginBottom: '0.8rem' }}>Connect on Social Platforms</span>
-                <div style={{ display: 'flex', gap: '0.8rem' }}>
-                  <a
-                    href={socialLinks.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-secondary btn-sm"
-                  >
-                    <GithubIcon size={16} />
-                    <span>GitHub</span>
-                  </a>
+            {/* Social Links Bar */}
+            <div className="glass-card spotlight-card" style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
+              <a
+                href={socialLinks.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'var(--text-muted)', textDecoration: 'none', transition: 'all 0.2s ease', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent-cyan)'}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
+              >
+                <GithubIcon size={20} />
+                <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>GitHub</span>
+              </a>
 
-                  <a
-                    href={socialLinks.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-secondary btn-sm"
-                  >
-                    <LinkedinIcon size={16} />
-                    <span>LinkedIn</span>
-                  </a>
-                </div>
-              </div>
-
+              <a
+                href={socialLinks.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'var(--text-muted)', textDecoration: 'none', transition: 'all 0.2s ease', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent-cyan)'}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
+              >
+                <LinkedinIcon size={20} />
+                <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>LinkedIn</span>
+              </a>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="glass-card" style={{ padding: '2.2rem' }}>
+          {/* Right Column: Contact Form */}
+          <div className="glass-card spotlight-card" style={{ padding: '2.2rem' }}>
             <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#ffffff', marginBottom: '1.5rem' }}>
-              Send Me a Message
+              Send Me a Direct Message
             </h3>
 
-            {/* Success Toast */}
-            {submitSuccess && (
-              <div
-                style={{
-                  padding: '1rem',
-                  borderRadius: 'var(--radius-sm)',
-                  background: 'rgba(16, 185, 129, 0.15)',
-                  border: '1px solid var(--accent-emerald)',
-                  color: 'var(--accent-emerald)',
-                  fontSize: '0.9rem',
-                  marginBottom: '1.5rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.6rem'
-                }}
-              >
-                <CheckCircle2 size={20} />
-                <span>Thank you! Your message has been sent successfully. I will get back to you soon.</span>
-              </div>
-            )}
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div>
+                  <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
+                    Your Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="John Doe"
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem 1rem',
+                      background: 'rgba(7, 10, 18, 0.7)',
+                      border: errors.name ? '1px solid #ef4444' : '1px solid var(--border-color)',
+                      borderRadius: 'var(--radius-sm)',
+                      color: '#ffffff',
+                      fontSize: '0.9rem',
+                      outline: 'none'
+                    }}
+                  />
+                  {errors.name && <span style={{ fontSize: '0.75rem', color: '#ef4444', marginTop: '0.2rem', display: 'block' }}>{errors.name}</span>}
+                </div>
 
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-              
-              {/* Name Input */}
-              <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.4rem' }}>
-                  Your Name *
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Enter your full name"
-                  style={{
-                    width: '100%',
-                    padding: '0.85rem 1rem',
-                    borderRadius: 'var(--radius-sm)',
-                    background: 'rgba(255, 255, 255, 0.04)',
-                    border: errors.name ? '1px solid #ef4444' : '1px solid var(--border-color)',
-                    color: '#ffffff',
-                    fontSize: '0.92rem',
-                    outline: 'none'
-                  }}
-                />
-                {errors.name && (
-                  <span style={{ fontSize: '0.78rem', color: '#ef4444', marginTop: '0.3rem', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
-                    <AlertCircle size={12} /> {errors.name}
-                  </span>
-                )}
-              </div>
-
-              {/* Email Input */}
-              <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.4rem' }}>
-                  Email Address *
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="your.email@example.com"
-                  style={{
-                    width: '100%',
-                    padding: '0.85rem 1rem',
-                    borderRadius: 'var(--radius-sm)',
-                    background: 'rgba(255, 255, 255, 0.04)',
-                    border: errors.email ? '1px solid #ef4444' : '1px solid var(--border-color)',
-                    color: '#ffffff',
-                    fontSize: '0.92rem',
-                    outline: 'none'
-                  }}
-                />
-                {errors.email && (
-                  <span style={{ fontSize: '0.78rem', color: '#ef4444', marginTop: '0.3rem', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
-                    <AlertCircle size={12} /> {errors.email}
-                  </span>
-                )}
+                <div>
+                  <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
+                    Your Email *
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="john@example.com"
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem 1rem',
+                      background: 'rgba(7, 10, 18, 0.7)',
+                      border: errors.email ? '1px solid #ef4444' : '1px solid var(--border-color)',
+                      borderRadius: 'var(--radius-sm)',
+                      color: '#ffffff',
+                      fontSize: '0.9rem',
+                      outline: 'none'
+                    }}
+                  />
+                  {errors.email && <span style={{ fontSize: '0.75rem', color: '#ef4444', marginTop: '0.2rem', display: 'block' }}>{errors.email}</span>}
+                </div>
               </div>
 
-              {/* Subject Input */}
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.4rem' }}>
+                <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
                   Subject *
                 </label>
                 <input
@@ -303,56 +261,46 @@ const Contact = () => {
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  placeholder="e.g. Internship Opportunity / Project Inquiry"
+                  placeholder="Project Opportunity / Hello"
                   style={{
                     width: '100%',
-                    padding: '0.85rem 1rem',
-                    borderRadius: 'var(--radius-sm)',
-                    background: 'rgba(255, 255, 255, 0.04)',
+                    padding: '0.75rem 1rem',
+                    background: 'rgba(7, 10, 18, 0.7)',
                     border: errors.subject ? '1px solid #ef4444' : '1px solid var(--border-color)',
+                    borderRadius: 'var(--radius-sm)',
                     color: '#ffffff',
-                    fontSize: '0.92rem',
+                    fontSize: '0.9rem',
                     outline: 'none'
                   }}
                 />
-                {errors.subject && (
-                  <span style={{ fontSize: '0.78rem', color: '#ef4444', marginTop: '0.3rem', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
-                    <AlertCircle size={12} /> {errors.subject}
-                  </span>
-                )}
+                {errors.subject && <span style={{ fontSize: '0.75rem', color: '#ef4444', marginTop: '0.2rem', display: 'block' }}>{errors.subject}</span>}
               </div>
 
-              {/* Message Textarea */}
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.4rem' }}>
+                <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
                   Message *
                 </label>
                 <textarea
                   name="message"
-                  rows="5"
+                  rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Write your message here..."
+                  placeholder="Tell me about your project or role details..."
                   style={{
                     width: '100%',
-                    padding: '0.85rem 1rem',
-                    borderRadius: 'var(--radius-sm)',
-                    background: 'rgba(255, 255, 255, 0.04)',
+                    padding: '0.75rem 1rem',
+                    background: 'rgba(7, 10, 18, 0.7)',
                     border: errors.message ? '1px solid #ef4444' : '1px solid var(--border-color)',
+                    borderRadius: 'var(--radius-sm)',
                     color: '#ffffff',
-                    fontSize: '0.92rem',
+                    fontSize: '0.9rem',
                     outline: 'none',
                     resize: 'vertical'
                   }}
                 />
-                {errors.message && (
-                  <span style={{ fontSize: '0.78rem', color: '#ef4444', marginTop: '0.3rem', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
-                    <AlertCircle size={12} /> {errors.message}
-                  </span>
-                )}
+                {errors.message && <span style={{ fontSize: '0.75rem', color: '#ef4444', marginTop: '0.2rem', display: 'block' }}>{errors.message}</span>}
               </div>
 
-              {/* Submit Button */}
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -368,21 +316,12 @@ const Contact = () => {
                   </>
                 )}
               </button>
-
             </form>
           </div>
 
         </div>
 
       </div>
-
-      <style>{`
-        @media (max-width: 850px) {
-          #contact .container > div {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
     </section>
   );
 };

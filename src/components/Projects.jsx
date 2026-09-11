@@ -1,214 +1,278 @@
 import React, { useState } from 'react';
-import { FolderGit2, ExternalLink, Eye, Sparkles } from 'lucide-react';
+import { ExternalLink, Eye, ArrowUpRight, Search } from 'lucide-react';
 import { GithubIcon } from './Icons';
 import { projectsData } from '../data/portfolioData';
 import ProjectModal from './ProjectModal';
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedProject, setSelectedProject] = useState(null);
 
   const filterCategories = ['All', 'Web Development', 'Java', 'Database', 'AI/ML'];
 
-  const filteredProjects = activeCategory === 'All'
-    ? projectsData
-    : projectsData.filter((p) => p.category.toLowerCase() === activeCategory.toLowerCase());
+  const filteredProjects = projectsData.filter((p) => {
+    const matchesCategory = activeCategory === 'All' || p.category.toLowerCase() === activeCategory.toLowerCase();
+    const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          p.shortDescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          p.tags.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
+    return matchesCategory && matchesSearch;
+  });
 
   return (
-    <section id="projects" className="section">
+    <section id="projects" className="section" style={{ paddingTop: '4rem' }}>
       <div className="container">
         
-        {/* Section Header */}
-        <div className="section-header">
-          <div className="section-badge">
-            <FolderGit2 size={14} />
-            <span>Featured Work</span>
-          </div>
-          <h2 className="section-title">
-            Key Software <span className="gradient-text">Projects</span>
+        {/* Section Header (Matching Screenshot: SELECTED WORK | 04 Projects) */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingBottom: '1.2rem',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+            marginBottom: '3rem'
+          }}
+        >
+          <h2
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.9rem',
+              fontWeight: 700,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: '#ffffff'
+            }}
+          >
+            SELECTED WORK
           </h2>
-          <p className="section-subtitle">
-            A showcase of my recent full-stack applications, database systems, and academic software engineering projects.
-          </p>
+
+          <div
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.85rem',
+              color: 'var(--text-muted)'
+            }}
+          >
+            0{filteredProjects.length} projects
+          </div>
         </div>
 
-        {/* Filter Buttons */}
+        {/* Category Filters & Search */}
         <div
           style={{
             display: 'flex',
             flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: '0.6rem',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '1rem',
             marginBottom: '3rem'
           }}
         >
-          {filterCategories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              style={{
-                padding: '0.5rem 1.2rem',
-                borderRadius: 'var(--radius-full)',
-                fontSize: '0.88rem',
-                fontWeight: 600,
-                cursor: 'pointer',
-                transition: 'var(--transition-fast)',
-                border: activeCategory === cat ? '1px solid var(--accent-cyan)' : '1px solid var(--border-color)',
-                background: activeCategory === cat ? 'rgba(6, 182, 212, 0.15)' : 'rgba(255, 255, 255, 0.03)',
-                color: activeCategory === cat ? 'var(--accent-cyan)' : 'var(--text-muted)'
-              }}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* Projects Grid */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
-            gap: '2rem'
-          }}
-        >
-          {filteredProjects.map((project) => (
-            <div
-              key={project.id}
-              className="glass-card"
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                overflow: 'hidden',
-                position: 'relative'
-              }}
-            >
-              {/* Thumbnail Frame */}
-              <div
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+            {filterCategories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
                 style={{
-                  width: '100%',
-                  height: '200px',
-                  overflow: 'hidden',
-                  position: 'relative'
+                  padding: '0.45rem 1.1rem',
+                  borderRadius: 'var(--radius-full)',
+                  fontSize: '0.82rem',
+                  fontFamily: 'var(--font-mono)',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  border: activeCategory === cat ? '1px solid #ffffff' : '1px solid rgba(255, 255, 255, 0.15)',
+                  background: activeCategory === cat ? '#ffffff' : 'transparent',
+                  color: activeCategory === cat ? '#070707' : 'var(--text-muted)'
                 }}
               >
-                <img
-                  src={project.thumbnail}
-                  alt={project.name}
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.6rem',
+              background: 'rgba(255, 255, 255, 0.04)',
+              border: '1px solid rgba(255, 255, 255, 0.15)',
+              borderRadius: 'var(--radius-full)',
+              padding: '0.4rem 1rem',
+              width: '100%',
+              maxWidth: '260px'
+            }}
+          >
+            <Search size={15} style={{ color: '#ffffff' }} />
+            <input
+              type="text"
+              placeholder="Search projects..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                outline: 'none',
+                color: '#fff',
+                fontSize: '0.85rem',
+                width: '100%',
+                fontFamily: 'var(--font-sans)'
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Editorial Project Cards Stack (Matching Screenshot 01 Form/Function) */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+          {filteredProjects.map((project, idx) => {
+            const isLightCard = idx % 2 === 0; // Alternating high-contrast off-white & dark cards
+            const num = (idx + 1).toString().padStart(2, '0');
+
+            return (
+              <div
+                key={project.id}
+                style={{
+                  background: isLightCard ? '#f4f4f2' : '#121212',
+                  color: isLightCard ? '#070707' : '#ffffff',
+                  borderRadius: 'var(--radius-md)',
+                  padding: '2.5rem',
+                  border: isLightCard ? '1px solid #ffffff' : '1px solid rgba(255, 255, 255, 0.15)',
+                  boxShadow: '0 20px 40px rgba(0,0,0,0.6)',
+                  transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+                }}
+              >
+                {/* Top Row: Index Number & Icon */}
+                <div
                   style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    transition: 'transform 0.5s ease'
-                  }}
-                  onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
-                  onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                />
-                
-                {/* Category Badge overlay */}
-                <span
-                  style={{
-                    position: 'absolute',
-                    top: '1rem',
-                    right: '1rem',
-                    padding: '0.25rem 0.65rem',
-                    borderRadius: 'var(--radius-sm)',
-                    background: 'rgba(7, 10, 18, 0.85)',
-                    backdropFilter: 'blur(10px)',
-                    border: '1px solid var(--border-color)',
-                    color: 'var(--accent-cyan)',
-                    fontSize: '0.75rem',
-                    fontWeight: 600
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    marginBottom: '2rem',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.9rem',
+                    fontWeight: 600,
+                    opacity: 0.8
                   }}
                 >
-                  {project.category}
-                </span>
-              </div>
-
-              {/* Card Body */}
-              <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.5rem', lineHeight: 1.3 }}>
-                  {project.name}
-                </h3>
-
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '1.2rem', flex: 1 }}>
-                  {project.shortDescription}
-                </p>
-
-                {/* Tech Stack Tags */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '1.5rem' }}>
-                  {project.tags.slice(0, 4).map((tag, i) => (
-                    <span key={i} className="tag-badge">
-                      {tag}
-                    </span>
-                  ))}
+                  <span>{num}</span>
+                  <span style={{ fontSize: '0.8rem', letterSpacing: '0.05em' }}>{project.date}</span>
                 </div>
 
-                {/* Card Actions */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '1rem', borderTop: '1px solid var(--border-color)' }}>
+                {/* Main Content Grid */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '2.5rem', alignItems: 'center' }}>
                   
-                  <button
-                    onClick={() => setSelectedProject(project)}
-                    className="btn btn-outline btn-sm"
-                    style={{ gap: '0.4rem' }}
-                  >
-                    <Eye size={15} />
-                    <span>View Details</span>
-                  </button>
-
-                  <div style={{ display: 'flex', gap: '0.6rem' }}>
-                    <a
-                      href={project.githubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title="GitHub Repository"
+                  {/* Left Title & Category */}
+                  <div>
+                    <h3
                       style={{
-                        width: '36px',
-                        height: '36px',
-                        borderRadius: 'var(--radius-sm)',
-                        background: 'rgba(255, 255, 255, 0.05)',
-                        border: '1px solid var(--border-color)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'var(--text-main)',
-                        transition: 'var(--transition-fast)'
+                        fontFamily: 'var(--font-display)',
+                        fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)',
+                        fontWeight: 800,
+                        letterSpacing: '-0.03em',
+                        lineHeight: 1.1,
+                        marginBottom: '0.8rem'
                       }}
                     >
-                      <GithubIcon size={18} />
-                    </a>
+                      {project.name}
+                    </h3>
 
-                    <a
-                      href={project.liveDemoLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title="Live Demo"
+                    <div
                       style={{
-                        width: '36px',
-                        height: '36px',
-                        borderRadius: 'var(--radius-sm)',
-                        background: 'rgba(6, 182, 212, 0.1)',
-                        border: '1px solid rgba(6, 182, 212, 0.3)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'var(--accent-cyan)',
-                        transition: 'var(--transition-fast)'
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.82rem',
+                        fontWeight: 700,
+                        letterSpacing: '0.08em',
+                        textTransform: 'uppercase',
+                        opacity: 0.75,
+                        marginBottom: '1.5rem'
                       }}
                     >
-                      <ExternalLink size={18} />
-                    </a>
+                      {project.category} • {project.role}
+                    </div>
+
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                      {project.tags.map((tag, tIdx) => (
+                        <span
+                          key={tIdx}
+                          style={{
+                            fontFamily: 'var(--font-mono)',
+                            fontSize: '0.75rem',
+                            padding: '0.2rem 0.6rem',
+                            borderRadius: '4px',
+                            background: isLightCard ? 'rgba(0, 0, 0, 0.08)' : 'rgba(255, 255, 255, 0.1)',
+                            color: isLightCard ? '#070707' : '#ffffff'
+                          }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right Description & Action Buttons */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    <p
+                      style={{
+                        fontSize: '1rem',
+                        lineHeight: 1.6,
+                        opacity: 0.85
+                      }}
+                    >
+                      {project.shortDescription}
+                    </p>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                      <button
+                        onClick={() => setSelectedProject(project)}
+                        style={{
+                          padding: '0.65rem 1.2rem',
+                          borderRadius: 'var(--radius-sm)',
+                          border: isLightCard ? '1px solid #070707' : '1px solid #ffffff',
+                          background: isLightCard ? '#070707' : '#ffffff',
+                          color: isLightCard ? '#ffffff' : '#070707',
+                          fontWeight: 600,
+                          fontSize: '0.88rem',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.4rem'
+                        }}
+                      >
+                        <Eye size={15} />
+                        <span>View Details</span>
+                      </button>
+
+                      <a
+                        href={project.githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          color: isLightCard ? '#070707' : '#ffffff',
+                          textDecoration: 'none',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.4rem',
+                          fontSize: '0.88rem',
+                          fontWeight: 600
+                        }}
+                      >
+                        <GithubIcon size={16} />
+                        <span>Repo</span>
+                        <ArrowUpRight size={14} />
+                      </a>
+                    </div>
                   </div>
 
                 </div>
 
               </div>
-
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* Expandable Modal Container */}
+        {/* Modal Overlay */}
         {selectedProject && (
           <ProjectModal
             project={selectedProject}
